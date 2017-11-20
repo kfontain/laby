@@ -43,25 +43,25 @@ public class ViewFrame {
         }
     }
 
-    public static void drawWall(int xs, int ys, int xt, int yt, Paint color){
+    public static void drawWall(int xs, int ys, int xt, int yt, Paint color) {
         int x = 0, y = 0, xspan = 0, yspan = 0;
-        if ( ys==yt ){
-            x = ((WALL+CELL) + (WALL+CELL) * (( int )( xs+xt )/2)) * SPAN;
-            y = (WALL + ys * (WALL+CELL)) * SPAN;
+        if (ys==yt) {
+            x = ((WALL + CELL) + (WALL + CELL) * ((int)(xs+xt) / 2)) * SPAN;
+            y = (WALL + ys * (WALL + CELL)) * SPAN;
             xspan = WALL * SPAN;
             yspan = CELL * SPAN;
             Rectangle square = new Rectangle (x, y, xspan, yspan);
             square.setFill(color);
             pane.getChildren().add(square);
         }
-        else if ( xs==xt ){
-            x = (WALL + xs * (WALL+CELL)) * SPAN;
-            y = ((WALL+CELL) + (WALL+CELL) * (( int )( ys+yt )/2)) * SPAN;
+        else if (xs==xt) {
+            x = (WALL + xs * (WALL + CELL)) * SPAN;
+            y = ((WALL + CELL) + (WALL + CELL) * ((int)(ys+yt) / 2)) * SPAN;
             xspan = CELL * SPAN;
             yspan = WALL * SPAN;
-            Rectangle square = new Rectangle (x, y, xspan, yspan);
+            Rectangle square = new Rectangle(x, y, xspan, yspan);
             square.setFill(color);
-            pane.getChildren().add( square );
+            pane.getChildren().add(square);
         }
     }
 }
