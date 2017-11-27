@@ -60,7 +60,8 @@ public class Maze {
 						coords[3] = y + 1;
 						break;
 					}
-					walls.add(coords);
+					if (coords[2] >= 0 && coords[3] >= 0)
+					    walls.add(coords);
 				}
 			}
 		}

@@ -28,10 +28,10 @@ public class Master {
 
     public void start(Stage primaryStage) {
         ViewFrame.getInstance();
+        ViewFrame.drawFrame(primaryStage, 10, 10);
         for(int[] wall : walls) {
-        	ViewFrame.drawWall(wall[0], wall[1], wall[2], wall[3], Color.RED);
+            ViewFrame.drawWall(wall[0], wall[1], wall[2], wall[3], Color.RED);
         }
-		ViewFrame.drawFrame(primaryStage, 10, 10);
     }
 
 }
