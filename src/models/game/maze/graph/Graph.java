@@ -4,6 +4,7 @@ import models.game.Direction;
 
 import java.io.Console;
 import java.util.Random;
+import java.util.Vector;
 
 public class Graph {
     private int sizeX;
@@ -74,6 +75,30 @@ public class Graph {
                     System.out.print(" ");
 
                 System.out.print("  ");
+            }
+
+            System.out.println("");
+        }
+    }
+
+    public void drawMazeOnConsole(){
+        for (int i = 0; i < sizeX; i++)
+            System.out.print(" _");
+
+        System.out.println("");
+        for (int j = 0; j < sizeY; j++){
+            System.out.print(("|"));
+            for (int i = 0; i < sizeX; i++){
+                Vector<Direction> walls = getVertex(i, j).getWalls();
+                if (walls.contains(Direction.SOUTH))
+                    System.out.print("_");
+                else
+                    System.out.print(" ");
+
+                if (walls.contains(Direction.EAST))
+                    System.out.print("|");
+                else
+                    System.out.print(" ");
             }
 
             System.out.println("");

@@ -120,4 +120,16 @@ public class Vertex {
         edges.add(e);
     }
 
+    public Vector<Direction> getWalls(){
+        Vector<Direction> res = new Vector<>();
+        for (Direction d : Direction.values()){
+            res.add(d);
+        }
+        for (Edge e : edges){
+            res.remove(e.getDirection());
+        }
+
+        return res;
+    }
+
 }
