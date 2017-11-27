@@ -16,13 +16,14 @@ public class ViewFrame {
     static final int WALL = 2; // thickness of the walls (in units)
     static final int CELL = 9; // size of the cells (in units)
     public static final Color WALL_COLOR = Color.BURLYWOOD;
+    private static Pane pane = new Pane();
 
     private ViewFrame() {
 
     }
 
     public static void drawFrame(Stage stage, int nbrX, int nbrY) {
-        Pane pane = new Pane();
+        
         Scene scene = new Scene(pane, ((WALL + CELL) * nbrX + WALL) * SPAN, ((WALL + CELL) * nbrY + WALL) * SPAN);
         scene.setFill(Color.BEIGE);
         Rectangle square;
@@ -55,7 +56,7 @@ public class ViewFrame {
 
     public static void drawWall(int xs, int ys, int xt, int yt, Paint color) {
         int x = 0, y = 0, xspan = 0, yspan = 0;
-        Pane pane = new Pane();
+        //Pane pane = new Pane();
         if (ys==yt) {
             x = ((WALL + CELL) + (WALL + CELL) * ((int)(xs+xt) / 2)) * SPAN;
             y = (WALL + ys * (WALL + CELL)) * SPAN;

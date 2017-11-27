@@ -18,7 +18,7 @@ public class Graph {
         vertexes[v.getX()][v.getY()] = v;
     }
 
-    Vertex getVertex(int x, int y){
+    public Vertex getVertex(int x, int y){
         return vertexes[x][y];
     }
 
