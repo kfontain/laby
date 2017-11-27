@@ -2,18 +2,24 @@ package views;
 
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
 
-import java.awt.*;
 
 public class ViewFrame {
+
+    private static ViewFrame vf;
 
     static final int SPAN = 4; // Pixels for a unit
     static final int WALL = 2; // thickness of the walls (in units)
     static final int CELL = 9; // size of the cells (in units)
     public static final Color WALL_COLOR = Color.BURLYWOOD;
+
+    private ViewFrame() {
+
+    }
 
     public static void drawFrame(Stage stage, int nbrX, int nbrY) {
         Pane pane = new Pane();
@@ -23,7 +29,7 @@ public class ViewFrame {
         stage.setScene(scene);
 
         square = new Rectangle (0, 0, SPAN * (nbrX * (CELL + WALL) +WALL), WALL * SPAN);
-        square.setFill(Color.RED);
+        square.setFill(WALL_COLOR);
         pane.getChildren().add(square);
         square = new Rectangle(0, SPAN * (nbrY * (CELL + WALL)), SPAN * (nbrX * (CELL + WALL) + WALL), WALL * SPAN);
         square.setFill(WALL_COLOR);
@@ -43,6 +49,8 @@ public class ViewFrame {
                 pane.getChildren().add(square);
             }
         }
+
+        stage.show();
     }
 
     public static void drawWall(int xs, int ys, int xt, int yt, Paint color) {
@@ -68,4 +76,8 @@ public class ViewFrame {
         }
     }
 
+    public static ViewFrame getInstance() {
+        if (vf == null) vf = new ViewFrame();
+        return vf;
+    }
 }

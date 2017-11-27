@@ -1,3 +1,4 @@
+import controllers.Master;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import models.game.maze.graph.Graph;
@@ -6,6 +7,7 @@ import static javafx.application.Application.launch;
 
 public class Main extends Application {
 
+    static Master ctrl;
     private static boolean debugModeEnabled = true;
 
     public static void testGraph(){
@@ -31,11 +33,12 @@ public class Main extends Application {
     }
 
     public static void main(String[] args){
-        launch();
+        ctrl = Master.getInstance();
+        launch(args);
     }
 
-    public void start(Stage stage){
-
+    public void start(Stage stage) {
+        ctrl.start(stage);
     }
 
     public void stop(){
