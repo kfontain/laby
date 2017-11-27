@@ -1,9 +1,10 @@
+import javafx.application.Application;
 import javafx.stage.Stage;
 import models.game.maze.graph.Graph;
 
 import static javafx.application.Application.launch;
 
-public class Main {
+public class Main extends Application {
 
     private static boolean debugModeEnabled = true;
 
