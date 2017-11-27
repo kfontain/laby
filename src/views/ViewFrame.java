@@ -63,7 +63,7 @@ public class ViewFrame {
             xspan = WALL * SPAN;
             yspan = CELL * SPAN;
             Rectangle square = new Rectangle (x, y, xspan, yspan);
-            square.setFill(Color.RED);
+            square.setFill(color);
             pane.getChildren().add(square);
         }
         else if (xs==xt) {
@@ -72,7 +72,7 @@ public class ViewFrame {
             xspan = CELL * SPAN;
             yspan = WALL * SPAN;
             Rectangle square = new Rectangle(x, y, xspan, yspan);
-            square.setFill(WALL_COLOR);
+            square.setFill(color);
             pane.getChildren().add(square);
         }
     }
