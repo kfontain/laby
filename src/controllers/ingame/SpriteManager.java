@@ -9,8 +9,9 @@ public class SpriteManager {
     private static HashMap<SpriteType, String> spriteTable;
 
     public static void initialize(String directoryPath){
+        String path = directoryPath;
         spriteTable = new HashMap<>();
-        spriteTable.put(SpriteType.PLAYER,  "res/player.png");
+        spriteTable.put(SpriteType.PLAYER, path + "/player.png");
     }
 
     public static Image getSprite(SpriteType type){

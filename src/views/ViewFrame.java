@@ -3,6 +3,7 @@ package views;
 import controllers.ingame.GameManager;
 import controllers.ingame.Inputs;
 import controllers.ingame.SpriteManager;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -18,6 +19,7 @@ import models.drawable.SpriteType;
 
 import java.awt.*;
 import java.util.LinkedList;
+import java.util.Vector;
 
 
 public class ViewFrame {
@@ -29,9 +31,10 @@ public class ViewFrame {
     static final int CELL = 9; // size of the cells (in units)
     public static final Color WALL_COLOR = Color.BURLYWOOD;
     private static Pane pane = new Pane();
+    private static Vector<Node> drawnEntities;
 
     private ViewFrame() {
-
+        drawnEntities = new Vector<>();
     }
 
     public static void drawFrame(Stage stage, int nbrX, int nbrY) {
@@ -40,7 +43,8 @@ public class ViewFrame {
         scene.setFill(Color.BEIGE);
         Rectangle square;
         stage.setScene(scene);
-        // A BOUGER
+
+        //TODO:  A BOUGER
         scene.addEventFilter(KeyEvent.KEY_PRESSED, new Inputs());
         //
 
@@ -105,14 +109,29 @@ public class ViewFrame {
         gc.drawImage(sprite, 0, 0);
         canvas.setLayoutX(xf * SPAN);
         canvas.setLayoutY(yf * SPAN);
-        pane.getChildren().add(canvas);
+        drawnEntities.add(canvas);
     }
 
     public static void drawEntities(){
         LinkedList<Entity> entities = GameManager.getEntities();
+        cleanEntities();
         for (Entity e : entities){
             SpriteType t = e.getSpriteType();
             drawSprite(e.getX(), e.getY(), SpriteManager.getSprite(t));
         }
+
+        renderEntities();
+    }
+
+    public static void cleanEntities(){
+        for (Node n : drawnEntities)
+            pane.getChildren().remove(n);
+
+        drawnEntities = new Vector<>();
+    }
+
+    public static void renderEntities(){
+        for (Node n : drawnEntities)
+            pane.getChildren().add(n);
     }
 }
