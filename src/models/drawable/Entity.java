@@ -12,6 +12,10 @@ public abstract class Entity {
         this.type = type;
     }
 
+    public Entity (EntityType type){
+        this.type = type;
+    }
+
     public EntityType getType() {
         return type;
     }

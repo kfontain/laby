@@ -9,6 +9,11 @@ public class Character extends Entity{
         setSpriteType((isPlayer ? SpriteType.PLAYER : SpriteType.NPC));
     }
 
+    public Character(boolean isPlayer){
+        super((isPlayer ? EntityType.PLAYER : EntityType.NPC));
+        setSpriteType((isPlayer ? SpriteType.PLAYER : SpriteType.NPC));
+    }
+
     public void moveUp(){
         setY(getY() - 1);
     }

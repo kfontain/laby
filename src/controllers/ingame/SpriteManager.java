@@ -12,6 +12,12 @@ public class SpriteManager {
         String path = directoryPath;
         spriteTable = new HashMap<>();
         spriteTable.put(SpriteType.PLAYER, path + "/player.png");
+        spriteTable.put(SpriteType.NPC, path + "/bad.png");
+        spriteTable.put(SpriteType.CANDY1, path + "/candy-1.png");
+        spriteTable.put(SpriteType.CANDY2, path + "/candy-2.png");
+        spriteTable.put(SpriteType.CANDY3, path + "/candy-3.png");
+        spriteTable.put(SpriteType.CANDY4, path + "/candy-4.png");
+
     }
 
     public static Image getSprite(SpriteType type){

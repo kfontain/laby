@@ -2,6 +2,7 @@ package controllers;
 
 import java.util.ArrayList;
 
+import controllers.ingame.EntitySpawner;
 import controllers.ingame.GameManager;
 import controllers.ingame.SpriteManager;
 import javafx.scene.paint.Color;
@@ -35,7 +36,12 @@ public class Master {
             ViewFrame.drawWall(wall[0], wall[1], wall[2], wall[3], Color.BURLYWOOD);
         }
 
-        GameManager.addEntity(new Character(2, 2, true));
+        EntitySpawner.spawnPlayerAtRandomPosition();
+        EntitySpawner.spawnCandyAtRandomPosition();
+        EntitySpawner.spawnCandyAtRandomPosition();
+        EntitySpawner.spawnCandyAtRandomPosition();
+        EntitySpawner.spawnCandyAtRandomPosition();
+        EntitySpawner.spawnCandyAtRandomPosition();
         ViewFrame.drawEntities();
 
 
