@@ -69,5 +69,17 @@ public class Maze {
 		return walls;
 		
 	}
+
+	public int getSizeX(){
+		return g.getSizeX();
+	}
+
+	public int getSizeY(){
+		return g.getSizeY();
+	}
+
+	public Vector<Direction> getWallsAt(int x, int y){
+		return g.getVertex(x, y).getWalls();
+	}
 	
 }

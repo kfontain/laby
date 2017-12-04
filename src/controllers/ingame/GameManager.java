@@ -1,21 +1,42 @@
 package controllers.ingame;
 
+import models.drawable.Character;
 import models.drawable.Entity;
-import sun.awt.image.ImageWatched;
+import models.drawable.EntityType;
+import models.game.Direction;
+import models.game.maze.Maze;
 
-import javax.xml.stream.events.EndElement;
 import java.util.LinkedList;
+import java.util.Random;
 
 public class GameManager {
 
     private static LinkedList<Entity> entities;
+    private static Random random;
 
-    public static void initialize(){
+    private static Maze maze;
+
+    private static Character player = null;
+
+    public static void initialize() {
         entities = new LinkedList<>();
+        random = new Random();
     }
 
     public static void addEntity(Entity entity){
+        if (entity.getType() == EntityType.PLAYER)
+            setPlayer((Character) entity);
+
         entities.push(entity);
+    }
+
+    public static void setPlayer(Character player) {
+        GameManager.player = player;
+    }
+
+    public static Character getPlayer(){
+
+        return player;
     }
 
     public static void removeEntity(Entity entity){
@@ -24,5 +45,40 @@ public class GameManager {
 
     public static LinkedList<Entity> getEntities(){
         return entities;
+    }
+
+    public static Random getRandom() {
+        return random;
+    }
+
+    public static void randomizeLevel(){
+        maze = maze.getInstance();
+    }
+
+    public static Maze getMaze() {
+        return maze;
+    }
+
+    public static boolean tryMoveCharacter(Character character, Direction direction){
+        int x = character.getX();
+        int y = character.getY();
+        boolean able = !maze.getWallsAt(x, y).contains(direction);
+        if (able)
+            switch (direction) {
+                case EAST:
+                    character.moveRight();
+                    break;
+                case SOUTH:
+                    character.moveDown();
+                    break;
+                case WEST:
+                    character.moveLeft();
+                    break;
+                case NORTH:
+                    character.moveUp();
+                    break;
+            }
+
+        return able;
     }
 }

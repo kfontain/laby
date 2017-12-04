@@ -1,11 +1,13 @@
 package views;
 
 import controllers.ingame.GameManager;
+import controllers.ingame.Inputs;
 import controllers.ingame.SpriteManager;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
@@ -38,6 +40,9 @@ public class ViewFrame {
         scene.setFill(Color.BEIGE);
         Rectangle square;
         stage.setScene(scene);
+        // A BOUGER
+        scene.addEventFilter(KeyEvent.KEY_PRESSED, new Inputs());
+        //
 
         square = new Rectangle (0, 0, SPAN * (nbrX * (CELL + WALL) +WALL), WALL * SPAN);
         square.setFill(WALL_COLOR);
