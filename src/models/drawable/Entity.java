@@ -4,6 +4,7 @@ public abstract class Entity {
     private int x;
     private int y;
     private EntityType type;
+    private SpriteType spriteType;
 
     public Entity (int x, int y, EntityType type){
         this.x = x;
@@ -29,5 +30,13 @@ public abstract class Entity {
 
     public void setY(int y) {
         this.y = y;
+    }
+
+    public void setSpriteType(SpriteType spriteType) {
+        this.spriteType = spriteType;
+    }
+
+    public SpriteType getSpriteType() {
+        return spriteType;
     }
 }

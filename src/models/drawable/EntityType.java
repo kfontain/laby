@@ -1,7 +1,8 @@
 package models.drawable;
 
 public enum EntityType {
-    CHARACTER,
+    PLAYER,
+    NPC,
     DOOR,
     ONOFF,
     BONUS

@@ -1,11 +1,21 @@
 package views;
 
+import controllers.ingame.GameManager;
+import controllers.ingame.SpriteManager;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
+import models.drawable.Entity;
+import models.drawable.SpriteType;
+
+import java.awt.*;
+import java.util.LinkedList;
 
 
 public class ViewFrame {
@@ -80,5 +90,24 @@ public class ViewFrame {
     public static ViewFrame getInstance() {
         if (vf == null) vf = new ViewFrame();
         return vf;
+    }
+
+    public static void drawSprite(int x, int y, Image sprite){
+        int xf = WALL * (x + 1) + CELL * x;
+        int yf = WALL * (y + 1) + CELL * y;
+        Canvas canvas = new Canvas(CELL * SPAN, CELL * SPAN);
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        gc.drawImage(sprite, 0, 0);
+        canvas.setLayoutX(xf * SPAN);
+        canvas.setLayoutY(yf * SPAN);
+        pane.getChildren().add(canvas);
+    }
+
+    public static void drawEntities(){
+        LinkedList<Entity> entities = GameManager.getEntities();
+        for (Entity e : entities){
+            SpriteType t = e.getSpriteType();
+            drawSprite(e.getX(), e.getY(), SpriteManager.getSprite(t));
+        }
     }
 }
