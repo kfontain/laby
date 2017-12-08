@@ -20,4 +20,9 @@ public class Bonus extends Entity{
         SpriteType[] types = {SpriteType.CANDY1, SpriteType.CANDY2, SpriteType.CANDY3, SpriteType.CANDY4};
         setSpriteType(types[random.nextInt(4)]);
     }
+
+    @Override
+    public void eventCollision() {
+
+    }
 }

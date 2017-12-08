@@ -29,4 +29,9 @@ public class Character extends Entity{
     public void moveLeft(){
         setX(getX() - 1);
     }
+
+    @Override
+    public void eventCollision() {
+
+    }
 }
