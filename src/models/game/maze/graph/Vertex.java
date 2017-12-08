@@ -10,6 +10,8 @@ public class Vertex {
     private int x;
     private int y;
     private Graph graph;
+    private int distFromPlayer;
+    private boolean isMarked;
 
     public Vector<Edge> getEdges() {
         return edges;
@@ -20,6 +22,16 @@ public class Vertex {
     public Vertex(Graph graph) {
         this.graph = graph;
         edges = new Vector<>();
+        setDistFromPlayer(-1);
+        isMarked = false;
+    }
+    
+    public boolean isMarked() {
+    	return isMarked;
+    }
+    
+    public void setMark(boolean mark) {
+    	isMarked = mark;
     }
 
     public int getX() {
@@ -115,6 +127,31 @@ public class Vertex {
 
         return false;
     }
+    
+    public Vector<Vertex> getNeighbours(){
+    	Vector<Vertex> neigh = new Vector<>();
+    	
+    	for(Direction d : Direction.values()) {
+    		if(isLinkedTo(d)) {
+				switch(d) {
+				case EAST:
+					neigh.add(graph.getVertex(x + 1, y));
+					break;
+				case WEST:
+					neigh.add(graph.getVertex(x - 1, y));
+					break;
+				case NORTH:
+					neigh.add(graph.getVertex(x, y - 1));
+					break;
+				case SOUTH:
+					neigh.add(graph.getVertex(x, y + 1));
+					break;
+				}
+    		}
+    	}
+    	
+    	return neigh;
+    }
 
     public void addEdge(Edge e){
         edges.add(e);
@@ -131,5 +168,13 @@ public class Vertex {
 
         return res;
     }
+
+	public int getDistFromPlayer() {
+		return distFromPlayer;
+	}
+
+	public void setDistFromPlayer(int distFromPlayer) {
+		this.distFromPlayer = distFromPlayer;
+	}
 
 }

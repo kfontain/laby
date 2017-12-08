@@ -26,7 +26,7 @@ public class Maze {
 		g.setSizeY(10);
 		g.createVertexArray();
 		g.generateMazeGraph();
-		g.drawMazeOnConsole();
+		//g.drawMazeOnConsole();
 	}
 	
 	public ArrayList<int[]> getWalls(){
@@ -72,6 +72,13 @@ public class Maze {
 		
 		return walls;
 		
+	}
+	
+	public void updateDistFromPlayer(int x, int y) {
+		g.updateDistanceFromPlayer(x, y);
+		g.drawGraphOnConsole();
+		g.drawGraphWithValuesOnConsole(); // origin distance starts at 10 just for the display.
+		g.drawMazeOnConsole();
 	}
 
 	public int getSizeX(){

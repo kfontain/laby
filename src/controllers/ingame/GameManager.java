@@ -60,7 +60,7 @@ public class GameManager {
         int x = character.getX();
         int y = character.getY();
         boolean able = !maze.getWallsAt(x, y).contains(direction);
-        if (able)
+        if (able) {
             switch (direction) {
                 case EAST:
                     character.moveRight();
@@ -75,7 +75,8 @@ public class GameManager {
                     character.moveUp();
                     break;
             }
-
+           //update number in graph
+        }
         return able;
     }
 }

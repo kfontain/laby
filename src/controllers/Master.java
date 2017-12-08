@@ -37,6 +37,10 @@ public class Master {
         }
 
         EntitySpawner.spawnPlayerAtRandomPosition();
+        Entity player = GameManager.getPlayer();
+        
+        GameManager.getMaze().updateDistFromPlayer(player.getX(), player.getY());
+        
         EntitySpawner.spawnCandyAtRandomPosition();
         EntitySpawner.spawnCandyAtRandomPosition();
         EntitySpawner.spawnCandyAtRandomPosition();

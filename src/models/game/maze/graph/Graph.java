@@ -13,6 +13,11 @@ public class Graph {
     private int exitNodeIndex;
     private Vertex[][] vertexes;
     private Random random;
+    
+
+    public Graph(){
+        random = new Random();
+    }
 
     void addVertex(Vertex v){
         vertexes[v.getX()][v.getY()] = v;
@@ -20,10 +25,6 @@ public class Graph {
 
     public Vertex getVertex(int x, int y){
         return vertexes[x][y];
-    }
-
-    public Graph(){
-        random = new Random();
     }
 
     public int getSizeX() {
@@ -80,6 +81,60 @@ public class Graph {
             System.out.println("");
         }
     }
+    
+ // origin distance starts at 10 just for the display.
+    public void drawGraphWithValuesOnConsole(){
+        for (int j = 0; j < sizeY; j++){
+            for (int i = 0; i < sizeX; i++){
+                System.out.print("" + (getVertex(i, j).getDistFromPlayer() +10));
+                if (getVertex(i, j).isLinkedTo(Direction.EAST))
+                    System.out.print("--");
+                else
+                    System.out.print("  ");
+            }
+            System.out.println("");
+            for (int i = 0; i < sizeX; i++){
+                if (getVertex(i, j).isLinkedTo(Direction.SOUTH))
+                    System.out.print("| ");
+                else
+                    System.out.print("  ");
+
+                System.out.print("  ");
+            }
+
+            System.out.println("");
+        }
+    }
+    
+    private void unMarkVertex() {
+    	for(int j = 0; j < sizeY; j++) {
+    		for(int i = 0; i < sizeX; i++) {
+    			getVertex(i, j).setMark(false);
+    		}
+    	}
+    }
+    
+    private void markAccessVertex(int i, int j, int value) {
+    	Vertex v = getVertex(i, j);
+    	
+    	Vector<Vertex> neigh = v.getNeighbours();
+    	for(Vertex n : neigh) {
+    		if(!n.isMarked()) {
+    			n.setDistFromPlayer(value + 1);
+    			n.setMark(true);
+    			markAccessVertex(n.getX(), n.getY(), value + 1);
+    		}
+    	}
+    	
+    }
+    
+    public void updateDistanceFromPlayer(int x, int y) {
+    	unMarkVertex();
+    	getVertex(x, y).setDistFromPlayer(0);
+    	getVertex(x, y).setMark(true);
+    	markAccessVertex(x, y, 0);
+    }
+    
 
     public void drawMazeOnConsole(){
         for (int i = 0; i < sizeX; i++)
