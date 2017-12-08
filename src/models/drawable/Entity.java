@@ -43,4 +43,10 @@ public abstract class Entity {
     public SpriteType getSpriteType() {
         return spriteType;
     }
+
+    public boolean ifCollision(Entity e){
+        return (this.x == e.x && this.y == e.y);
+    }
+
+    public abstract void eventCollision();
 }

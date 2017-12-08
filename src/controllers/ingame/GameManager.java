@@ -17,10 +17,12 @@ public class GameManager {
     private static Maze maze;
 
     private static Character player = null;
+    private static int nbBonus;
 
     public static void initialize() {
         entities = new LinkedList<>();
         random = new Random();
+        nbBonus = 0;
         maze = maze.getInstance();
     }
 
@@ -36,7 +38,6 @@ public class GameManager {
     }
 
     public static Character getPlayer(){
-
         return player;
     }
 
@@ -54,6 +55,10 @@ public class GameManager {
 
     public static Maze getMaze() {
         return maze;
+    }
+
+    public static void addNbBonus(){
+        nbBonus += 1;
     }
 
     public static boolean tryMoveCharacter(Character character, Direction direction){
@@ -76,6 +81,7 @@ public class GameManager {
                     break;
             }
            //update number in graph
+            EventManager.manageCollision();
         }
         return able;
     }
