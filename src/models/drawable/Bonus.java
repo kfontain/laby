@@ -23,6 +23,7 @@ public class Bonus extends Entity{
 
     @Override
     public void eventCollision() {
-
+        GameManager.addNbBonus();
+        GameManager.removeEntity(this);
     }
 }
