@@ -21,6 +21,7 @@ public class GameManager {
     public static void initialize() {
         entities = new LinkedList<>();
         random = new Random();
+        maze = maze.getInstance();
     }
 
     public static void addEntity(Entity entity){
@@ -49,10 +50,6 @@ public class GameManager {
 
     public static Random getRandom() {
         return random;
-    }
-
-    public static void randomizeLevel(){
-        maze = maze.getInstance();
     }
 
     public static Maze getMaze() {

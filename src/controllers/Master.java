@@ -28,7 +28,7 @@ public class Master {
 
     public void start(Stage primaryStage) {
         GameManager.initialize();
-        GameManager.randomizeLevel();
+        GameManager.getMaze().initializeGraph(10, 10);
         SpriteManager.initialize("res");
 
         ViewFrame.drawFrame(primaryStage, 10, 10);

@@ -12,17 +12,21 @@ public class Maze {
 	private static Maze maze;
 	
 	public Maze() {
-        g = new Graph();
-        g.setSizeX(10);
-        g.setSizeY(10);
-        g.createVertexArray();
-        g.generateMazeGraph();
-        g.drawMazeOnConsole();
+		initializeGraph(10, 10);
 	}
 	
 	public static Maze getInstance() {
 		if(maze == null) maze = new Maze();
 		return maze;
+	}
+
+	public void initializeGraph(int x, int y){
+		g = new Graph();
+		g.setSizeX(10);
+		g.setSizeY(10);
+		g.createVertexArray();
+		g.generateMazeGraph();
+		g.drawMazeOnConsole();
 	}
 	
 	public ArrayList<int[]> getWalls(){
