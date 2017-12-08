@@ -1,6 +1,7 @@
 package models.drawable;
 
 import controllers.ingame.GameManager;
+import models.game.Direction;
 
 public class Character extends Entity{
 
@@ -29,9 +30,26 @@ public class Character extends Entity{
     public void moveLeft(){
         setX(getX() - 1);
     }
+    
+    public void move(Direction d) {
+    	switch (d) {
+        case EAST:
+            moveRight();
+            break;
+        case SOUTH:
+            moveDown();
+            break;
+        case WEST:
+            moveLeft();
+            break;
+        case NORTH:
+            moveUp();
+            break;
+    }
+    }
 
     @Override
     public void eventCollision() {
-
+    	System.out.println("Aïe !");
     }
 }

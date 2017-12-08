@@ -30,4 +30,9 @@ public class EntitySpawner {
         Entity e = new Bonus();
         spawnAtRandomPosition(e);
     }
+    
+    public static void spawnNpcAtRandomPosition() {
+    	Entity e = new Character(false);
+    	spawnAtRandomPosition(e);
+    }
 }

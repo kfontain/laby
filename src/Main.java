@@ -42,6 +42,11 @@ public class Main extends Application {
     }
 
     public void stop(){
-
+    	try {
+			super.stop();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 }

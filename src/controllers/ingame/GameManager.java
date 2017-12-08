@@ -17,10 +17,12 @@ public class GameManager {
     private static Maze maze;
 
     private static Character player = null;
+    private static LinkedList<Character>  NPCs = null;
     private static int nbBonus;
 
     public static void initialize() {
         entities = new LinkedList<>();
+        NPCs = new LinkedList<>();
         random = new Random();
         nbBonus = 0;
         maze = maze.getInstance();
@@ -29,6 +31,8 @@ public class GameManager {
     public static void addEntity(Entity entity){
         if (entity.getType() == EntityType.PLAYER)
             setPlayer((Character) entity);
+        else if(entity.getType() == EntityType.NPC)
+        	NPCs.push((Character)entity);
 
         entities.push(entity);
     }
@@ -60,12 +64,21 @@ public class GameManager {
     public static void addNbBonus(){
         nbBonus += 1;
     }
+    
+    public static void tryMoveNPCs() {
+        for(Character npc : NPCs) {
+        	Direction dir = maze.getDirectionForNPC(npc.getX(), npc.getY());
+        	boolean hasMoved = tryMoveCharacter(npc, dir);
+        	EventManager.manageCollision();
+        }
+    }
 
     public static boolean tryMoveCharacter(Character character, Direction direction){
         int x = character.getX();
         int y = character.getY();
         boolean able = !maze.getWallsAt(x, y).contains(direction);
         if (able) {
+        	//character.move(direction);
             switch (direction) {
                 case EAST:
                     character.moveRight();
@@ -80,8 +93,17 @@ public class GameManager {
                     character.moveUp();
                     break;
             }
-           //update number in graph
             EventManager.manageCollision();
+            maze.updateDistFromPlayer(getPlayer().getX(), GameManager.getPlayer().getY());
+            /*
+            for(Character npc : NPCs) {
+            	Direction dir = maze.getDirectionForNPC(npc.getX(), npc.getY());
+            	npc.move(dir);
+            }
+            */
+            EventManager.manageCollision();
+
+            
         }
         return able;
     }

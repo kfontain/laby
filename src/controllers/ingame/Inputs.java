@@ -1,7 +1,11 @@
 package controllers.ingame;
 
+import java.util.LinkedList;
+
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
+import models.drawable.Entity;
+import models.drawable.EntityType;
 import models.game.Direction;
 import views.ViewFrame;
 
@@ -10,26 +14,30 @@ public class Inputs implements EventHandler<KeyEvent>{
 
     @Override
     public void handle(KeyEvent event) {
+    	boolean hasMoved;
         switch (event.getCode()){
             case UP:
-                GameManager.tryMoveCharacter(GameManager.getPlayer(), Direction.NORTH);
-                ViewFrame.drawEntities();
+            	hasMoved = GameManager.tryMoveCharacter(GameManager.getPlayer(), Direction.NORTH);
                 break;
             case DOWN:
-                GameManager.tryMoveCharacter(GameManager.getPlayer(), Direction.SOUTH);
-                ViewFrame.drawEntities();
+            	hasMoved = GameManager.tryMoveCharacter(GameManager.getPlayer(), Direction.SOUTH);
                 break;
             case LEFT:
-                GameManager.tryMoveCharacter(GameManager.getPlayer(), Direction.WEST);
-                ViewFrame.drawEntities();
+            	hasMoved = GameManager.tryMoveCharacter(GameManager.getPlayer(), Direction.WEST);
                 break;
             case RIGHT:
-                GameManager.tryMoveCharacter(GameManager.getPlayer(), Direction.EAST);
-                ViewFrame.drawEntities();
+            	hasMoved = GameManager.tryMoveCharacter(GameManager.getPlayer(), Direction.EAST);
                 break;
             default:
-                return;
+            	hasMoved = false;
+                break;
         }
+        if(hasMoved) {
+        	GameManager.tryMoveNPCs();
+        }
+
+        ViewFrame.drawEntities();
+        return;
     }
 
 }

@@ -76,9 +76,22 @@ public class Maze {
 	
 	public void updateDistFromPlayer(int x, int y) {
 		g.updateDistanceFromPlayer(x, y);
-		g.drawGraphOnConsole();
+		//g.drawGraphOnConsole();
 		g.drawGraphWithValuesOnConsole(); // origin distance starts at 10 just for the display.
-		g.drawMazeOnConsole();
+		//g.drawMazeOnConsole();
+	}
+	
+	public Direction getDirectionForNPC(int x, int y) {
+		Vertex npc = g.getVertex(x, y);
+		Vector<Vertex> neigh = npc.getNeighbours();
+		int dist = npc.getDistFromPlayer();
+		for(Vertex u : neigh) {
+			if(u.getDistFromPlayer() < dist) {
+				return npc.getDirectionTo(u);
+			}
+		}
+		return null;
+		
 	}
 
 	public int getSizeX(){

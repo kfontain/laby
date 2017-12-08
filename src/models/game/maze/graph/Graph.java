@@ -83,6 +83,7 @@ public class Graph {
     }
     
  // origin distance starts at 10 just for the display.
+    
     public void drawGraphWithValuesOnConsole(){
         for (int j = 0; j < sizeY; j++){
             for (int i = 0; i < sizeX; i++){

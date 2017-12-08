@@ -128,6 +128,33 @@ public class Vertex {
         return false;
     }
     
+    public Direction getDirectionTo(Vertex dest) {
+    	for(Direction d : Direction.values()) {
+    		if(isLinkedTo(d)) {
+				switch(d) {
+				case EAST:
+					if(graph.getVertex(x + 1, y) == dest)
+						return Direction.EAST;
+					break;
+				case WEST:
+					if(graph.getVertex(x - 1, y) == dest)
+						return Direction.WEST;
+					break;
+				case NORTH:
+					if(graph.getVertex(x, y - 1) == dest)
+						return Direction.NORTH;
+					break;
+				case SOUTH:
+					if(graph.getVertex(x, y + 1) == dest)
+						return Direction.SOUTH;
+					break;
+				}
+    			
+    		}
+    	}
+    	return null;
+    }
+    
     public Vector<Vertex> getNeighbours(){
     	Vector<Vertex> neigh = new Vector<>();
     	

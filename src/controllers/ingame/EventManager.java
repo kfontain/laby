@@ -2,6 +2,7 @@ package controllers.ingame;
 
 import models.drawable.Character;
 import models.drawable.Entity;
+import models.drawable.EntityType;
 
 import java.util.LinkedList;
 
@@ -17,7 +18,12 @@ public class EventManager {
             }
         }
         for(Entity e : entitiesCol){
-            e.eventCollision();
+        	if(e.getType() != EntityType.NPC)
+        		e.eventCollision();
+        	else {
+        		((Character)e).eventCollision();
+        	}
+        		
         }
     }
 }

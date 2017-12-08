@@ -41,6 +41,10 @@ public class Master {
         
         GameManager.getMaze().updateDistFromPlayer(player.getX(), player.getY());
         
+        EntitySpawner.spawnNpcAtRandomPosition();
+        EntitySpawner.spawnNpcAtRandomPosition();
+        EntitySpawner.spawnNpcAtRandomPosition();
+        
         EntitySpawner.spawnCandyAtRandomPosition();
         EntitySpawner.spawnCandyAtRandomPosition();
         EntitySpawner.spawnCandyAtRandomPosition();
@@ -49,6 +53,10 @@ public class Master {
         ViewFrame.drawEntities();
 
 
+    }
+    
+    public void stop() {
+    	mst = null;
     }
 
 }
