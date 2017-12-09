@@ -80,13 +80,13 @@ public class Graph {
             System.out.println("");
         }
     }
-    
- // origin distance starts at 10 just for the display.
+
     
     public void drawGraphWithValuesOnConsole(){
         for (int j = 0; j < sizeY; j++){
             for (int i = 0; i < sizeX; i++){
-                System.out.print("" + (getVertex(i, j).getDistFromPlayer() +10));
+                int d = getVertex(i, j).getDistFromPlayer();
+                System.out.print( (d < 10? "0" : "") + d);
                 if (getVertex(i, j).isLinkedTo(Direction.EAST))
                     System.out.print("--");
                 else

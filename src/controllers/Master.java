@@ -34,7 +34,7 @@ public class Master {
         ViewFrame.drawFrame(primaryStage, 10, 10);
         for(int[] wall : GameManager.getMaze().getWalls()) {
             ViewFrame.drawWall(wall[0], wall[1], wall[2], wall[3], Color.BURLYWOOD);
-        }
+    }
 
         EntitySpawner.spawnPlayerAtRandomPosition();
         Entity player = GameManager.getPlayer();
