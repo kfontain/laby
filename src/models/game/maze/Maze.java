@@ -12,7 +12,7 @@ public class Maze {
 	private static Maze maze;
 	
 	public Maze() {
-		initializeGraph(10, 10);
+		//initializeGraph(10, 10);
 	}
 	
 	public static Maze getInstance() {
