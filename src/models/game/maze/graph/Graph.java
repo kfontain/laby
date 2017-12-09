@@ -77,7 +77,6 @@ public class Graph {
 
                 System.out.print("  ");
             }
-
             System.out.println("");
         }
     }

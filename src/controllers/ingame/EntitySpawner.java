@@ -3,6 +3,7 @@ package controllers.ingame;
 import models.drawable.Bonus;
 import models.drawable.Character;
 import models.drawable.Entity;
+import models.drawable.OnOff;
 
 import java.util.Random;
 
@@ -34,5 +35,10 @@ public class EntitySpawner {
     public static void spawnNpcAtRandomPosition() {
     	Entity e = new Character(false);
     	spawnAtRandomPosition(e);
+    }
+
+    public static void spawnOnOffAtRandomPosition() {
+        Entity e = new OnOff();
+        spawnAtRandomPosition(e);
     }
 }

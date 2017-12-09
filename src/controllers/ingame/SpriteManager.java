@@ -17,7 +17,8 @@ public class SpriteManager {
         spriteTable.put(SpriteType.CANDY2, path + "/candy-2.png");
         spriteTable.put(SpriteType.CANDY3, path + "/candy-3.png");
         spriteTable.put(SpriteType.CANDY4, path + "/candy-4.png");
-
+        spriteTable.put(SpriteType.SWITCH_OFF, path + "/button_close.png");
+        spriteTable.put(SpriteType.SWITCH_ON, path + "/button_open.png");
     }
 
     public static Image getSprite(SpriteType type){
