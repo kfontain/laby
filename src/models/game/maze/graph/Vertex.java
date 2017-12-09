@@ -68,8 +68,8 @@ public class Vertex {
             int yt = 0;
             Edge ne = new Edge();
             Edge nv = new Edge();
-            ne.setWallType(WallType.OPENED_DOOR);
-            nv.setWallType(WallType.OPENED_DOOR);
+            ne.setWallType(WallType.PATH);
+            nv.setWallType(WallType.PATH);
             switch (currentDirection) {
                 case EAST:
                     xt = 1;
@@ -101,6 +101,16 @@ public class Vertex {
                 this.addEdge(ne);
                 v.addEdge(nv);
                 v.randomizePaths(random);
+            }else{
+                boolean ae = false;
+                for (Edge ee : edges)
+                    if (ee.getDirection() == currentDirection)
+                        ae = true;
+
+                if (!ae){
+                    ne.setWallType(WallType.WALL);
+                    this.addEdge(ne);
+                }
             }
         }
     }
@@ -122,7 +132,7 @@ public class Vertex {
 
     public boolean isLinkedTo(Direction d){
         for (Edge e : edges)
-            if (e.getDirection() == d)
+            if (e.getDirection() == d && e.getWallType() != WallType.WALL && e.getWallType() != WallType.CLOSED_DOOR)
                 return true;
 
         return false;
@@ -185,12 +195,20 @@ public class Vertex {
     }
 
     public Vector<Direction> getWalls(){
-        Vector<Direction> res = new Vector<>();
+        /*Vector<Direction> res = new Vector<>();
         for (Direction d : Direction.values()){
             res.add(d);
         }
         for (Edge e : edges){
             res.remove(e.getDirection());
+        }
+
+        return res;*/
+
+        Vector<Direction> res = new Vector<>();
+        for (Edge e : edges){
+            if (e.getWallType() == WallType.WALL || e.getWallType() == WallType.CLOSED_DOOR)
+            res.add(e.getDirection());
         }
 
         return res;
