@@ -28,13 +28,10 @@ public class Master {
 
     public void start(Stage primaryStage) {
         GameManager.initialize();
-        GameManager.getMaze().initializeGraph(20, 20);
+        GameManager.getMaze().initializeGraph(10, 10);
         SpriteManager.initialize("res");
 
-        ViewFrame.drawFrame(primaryStage, 20, 20);
-        for(int[] wall : GameManager.getMaze().getWalls()) {
-            ViewFrame.drawWall(wall[0], wall[1], wall[2], wall[3], Color.BURLYWOOD);
-    }
+        ViewFrame.drawFrame(primaryStage, 10, 10);
 
         EntitySpawner.spawnPlayerAtRandomPosition();
         Entity player = GameManager.getPlayer();
@@ -46,6 +43,20 @@ public class Master {
         EntitySpawner.spawnOnOffAtRandomPosition();
 
         EntitySpawner.spawnCandyAtRandomPosition();
+
+    }
+
+    public void render(){
+        for(int[] wall : GameManager.getMaze().getWalls()) {
+            ViewFrame.drawWall(wall[0], wall[1], wall[2], wall[3], Color.BURLYWOOD);
+        }
+        for(int[] door : GameManager.getMaze().getDoors(true)) {
+            ViewFrame.drawWall(door[0], door[1], door[2], door[3], Color.GREEN);
+        }
+
+        for(int[] door : GameManager.getMaze().getDoors(false)) {
+            ViewFrame.drawWall(door[0], door[1], door[2], door[3], Color.RED);
+        }
 
         ViewFrame.drawEntities();
     }

@@ -12,6 +12,7 @@ public class Vertex {
     private Graph graph;
     private int distFromPlayer;
     private boolean isMarked;
+    private Random random;
 
     public Vector<Edge> getEdges() {
         return edges;
@@ -207,10 +208,19 @@ public class Vertex {
 
         Vector<Direction> res = new Vector<>();
         for (Edge e : edges){
-            if (e.getWallType() == WallType.WALL || e.getWallType() == WallType.CLOSED_DOOR)
-            res.add(e.getDirection());
+            if (e.getWallType() == WallType.WALL)
+                res.add(e.getDirection());
         }
 
+        return res;
+    }
+
+    public Vector<Direction> getDoors(boolean isClosed){
+        Vector<Direction> res = new Vector<>();
+        for (Edge e : edges){
+            if (e.getWallType() == (isClosed ? WallType.CLOSED_DOOR : WallType.OPENED_DOOR))
+                res.add(e.getDirection());
+        }
         return res;
     }
 
@@ -221,5 +231,4 @@ public class Vertex {
 	public void setDistFromPlayer(int distFromPlayer) {
 		this.distFromPlayer = distFromPlayer;
 	}
-
 }

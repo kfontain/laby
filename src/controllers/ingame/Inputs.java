@@ -2,6 +2,7 @@ package controllers.ingame;
 
 import java.util.LinkedList;
 
+import controllers.Master;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
 import models.drawable.Entity;
@@ -36,7 +37,7 @@ public class Inputs implements EventHandler<KeyEvent>{
         	GameManager.tryMoveNPCs();
         }
 
-        ViewFrame.drawEntities();
+        Master.getInstance().render();
         return;
     }
 

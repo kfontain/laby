@@ -1,6 +1,7 @@
 package models.game.maze.graph;
 
 import models.game.Direction;
+import models.game.WallType;
 
 import java.io.Console;
 import java.util.Random;
@@ -13,7 +14,6 @@ public class Graph {
     private int exitNodeIndex;
     private Vertex[][] vertexes;
     private Random random;
-    
 
     public Graph(){
         random = new Random();
