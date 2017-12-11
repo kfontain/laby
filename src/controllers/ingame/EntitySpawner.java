@@ -1,9 +1,7 @@
 package controllers.ingame;
 
-import models.drawable.Bonus;
+import models.drawable.*;
 import models.drawable.Character;
-import models.drawable.Entity;
-import models.drawable.OnOff;
 
 import java.util.Random;
 
@@ -39,6 +37,11 @@ public class EntitySpawner {
 
     public static void spawnOnOffAtRandomPosition() {
         Entity e = new OnOff();
+        spawnAtRandomPosition(e);
+    }
+
+    public static void spawnDoorAtRandomPosition() {
+        Entity e = new Door();
         spawnAtRandomPosition(e);
     }
 }

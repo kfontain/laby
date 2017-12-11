@@ -27,3 +27,12 @@ public class Bonus extends Entity{
         GameManager.removeEntity(this);
     }
 }
+
+
+
+
+
+
+
+
+

@@ -9,7 +9,7 @@ public class Vertex {
     private int x;
     private int y;
     private Graph graph;
-    private int distFromPlayer;
+    private int dist;
     private boolean isMarked;
     private Random random;
 
@@ -22,7 +22,7 @@ public class Vertex {
     public Vertex(Graph graph) {
         this.graph = graph;
         edges = new HashMap<>();
-        setDistFromPlayer(-1);
+        dist = -1;
         isMarked = false;
     }
     
@@ -198,6 +198,10 @@ public class Vertex {
         return res;
     }
 
+	public int getDist() {
+		return dist;
+	}
+
     public Vector<Direction> getDoors(boolean isClosed){
         Vector<Direction> res = new Vector<>();
         for (Map.Entry<Direction, Edge> e : edges.entrySet()){
@@ -208,11 +212,9 @@ public class Vertex {
         return res;
     }
 
-	public int getDistFromPlayer() {
-		return distFromPlayer;
-	}
 
-	public void setDistFromPlayer(int distFromPlayer) {
-		this.distFromPlayer = distFromPlayer;
+
+	public void setDist(int dist) {
+		this.dist = dist;
 	}
 }
