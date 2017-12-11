@@ -44,6 +44,7 @@ public class Master {
 
         EntitySpawner.spawnCandyAtRandomPosition();
 
+        EntitySpawner.spawnDoorAtRandomPosition();
     }
     
     public void render(){
