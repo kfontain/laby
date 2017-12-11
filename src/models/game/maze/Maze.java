@@ -1,6 +1,7 @@
 package models.game.maze;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Random;
 import java.util.Vector;
 
@@ -31,7 +32,7 @@ public class Maze {
 		g.setSizeY(y);
 		g.createVertexArray();
 		g.generateMazeGraph();
-		//g.drawMazeOnConsole();
+		g.drawMazeOnConsole();
 	}
 
     public ArrayList<int[]> getWalls(){
@@ -154,11 +155,12 @@ public class Maze {
 	public Edge getRandomEdge() {
 		int x = random.nextInt(g.getSizeX());
 		int y = random.nextInt(g.getSizeY());
-		Vector<Edge> edges = this.g.getVertex(x,y).getEdges();
+		Collection<Edge> edges = this.g.getVertex(x,y).getEdges().values();
 		for (Edge e : edges) {
 			if (e.getWallType() == WallType.WALL || e.getWallType() == WallType.CLOSED_DOOR)
 				return e;
 		}
+
 		return null;
 	}
 

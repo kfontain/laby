@@ -3,8 +3,7 @@ package models.game.maze.graph;
 import models.game.Direction;
 import models.game.WallType;
 
-import java.util.Random;
-import java.util.Vector;
+import java.util.*;
 
 public class Vertex {
     private int x;
@@ -14,15 +13,15 @@ public class Vertex {
     private boolean isMarked;
     private Random random;
 
-    public Vector<Edge> getEdges() {
+    public HashMap<Direction, Edge> getEdges() {
         return edges;
     }
 
-    private Vector<Edge> edges;
+    private HashMap<Direction, Edge> edges;
 
     public Vertex(Graph graph) {
         this.graph = graph;
-        edges = new Vector<>();
+        edges = new HashMap<>();
         setDistFromPlayer(-1);
         isMarked = false;
     }
@@ -65,52 +64,40 @@ public class Vertex {
 
         for (int i = 0; i < 4; i++){
             Direction currentDirection = deck.get(i);
-            int xt = 0;
-            int yt = 0;
-            Edge ne = new Edge();
-            Edge nv = new Edge();
-            ne.setWallType(WallType.PATH);
-            nv.setWallType(WallType.PATH);
-            switch (currentDirection) {
-                case EAST:
-                    xt = 1;
-                    ne.setDirection(Direction.EAST);
-                    nv.setDirection(Direction.WEST);
-                    break;
-                case SOUTH:
-                    yt = 1;
-                    ne.setDirection(Direction.SOUTH);
-                    nv.setDirection(Direction.NORTH);
-                    break;
-                case WEST:
-                    xt = -1;
-                    ne.setDirection(Direction.WEST);
-                    nv.setDirection(Direction.EAST);
-                    break;
-                case NORTH:
-                    yt = -1;
-                    ne.setDirection(Direction.NORTH);
-                    nv.setDirection(Direction.SOUTH);
-                    break;
-            }
+            if (!edges.containsKey(currentDirection)){
 
-            Vertex v = new Vertex(graph);
-            v.setX(x + xt);
-            v.setY(y + yt);
-            if (isPossibleToMove(currentDirection) && graph.getVertex(v.getX(), v.getY()) == null){
-                graph.addVertex(v);
-                this.addEdge(ne);
-                v.addEdge(nv);
-                v.randomizePaths(random);
-            }else{
-                boolean ae = false;
-                for (Edge ee : edges)
-                    if (ee.getDirection() == currentDirection)
-                        ae = true;
+                int xt = 0;
+                int yt = 0;
+                Edge ne = new Edge();
+                ne.setWallType(WallType.PATH);
+                switch (currentDirection) {
+                    case EAST:
+                        xt = 1;
+                        break;
+                    case SOUTH:
+                        yt = 1;
+                        break;
+                    case WEST:
+                        xt = -1;
+                        break;
+                    case NORTH:
+                        yt = -1;
+                        break;
+                }
 
-                if (!ae){
-                    ne.setWallType(WallType.WALL);
-                    this.addEdge(ne);
+                Vertex v = new Vertex(graph);
+                v.setX(x + xt);
+                v.setY(y + yt);
+                if (isPossibleToMove(currentDirection) && graph.getVertex(v.getX(), v.getY()) == null){
+                    graph.addVertex(v);
+                    this.addEdge(currentDirection, ne);
+                    v.addEdge(currentDirection.getOppositeDirection(), ne);
+                    v.randomizePaths(random);
+                }else{
+                        ne.setWallType(WallType.WALL);
+                        this.addEdge(currentDirection, ne);
+                        if (v.getX() >= 0 && v.getX() < graph.getSizeX() && v.getY() >= 0 && v.getY() < graph.getSizeY())
+                            graph.getVertex(v.getX(), v.getY()).edges.put(currentDirection.getOppositeDirection(), ne);
                 }
             }
         }
@@ -132,11 +119,7 @@ public class Vertex {
     }
 
     public boolean isLinkedTo(Direction d){
-        for (Edge e : edges)
-            if (e.getDirection() == d && e.getWallType() != WallType.WALL && e.getWallType() != WallType.CLOSED_DOOR)
-                return true;
-
-        return false;
+        return edges.get(d).getWallType() == WallType.PATH || edges.get(d).getWallType() == WallType.OPENED_DOOR;
     }
     
     public Direction getDirectionTo(Vertex dest) {
@@ -191,8 +174,8 @@ public class Vertex {
     	return neigh;
     }
 
-    public void addEdge(Edge e){
-        edges.add(e);
+    public void addEdge(Direction direction, Edge e){
+        edges.put(direction, e);
     }
 
     public Vector<Direction> getWalls(){
@@ -207,9 +190,9 @@ public class Vertex {
         return res;*/
 
         Vector<Direction> res = new Vector<>();
-        for (Edge e : edges){
-            if (e.getWallType() == WallType.WALL)
-                res.add(e.getDirection());
+        for (Map.Entry<Direction, Edge> e : edges.entrySet()){
+            if (e.getValue().getWallType() == WallType.WALL)
+                res.add(e.getKey());
         }
 
         return res;
@@ -217,10 +200,11 @@ public class Vertex {
 
     public Vector<Direction> getDoors(boolean isClosed){
         Vector<Direction> res = new Vector<>();
-        for (Edge e : edges){
-            if (e.getWallType() == (isClosed ? WallType.CLOSED_DOOR : WallType.OPENED_DOOR))
-                res.add(e.getDirection());
+        for (Map.Entry<Direction, Edge> e : edges.entrySet()){
+            if (e.getValue().getWallType() == (isClosed ? WallType.CLOSED_DOOR : WallType.OPENED_DOOR))
+                res.add(e.getKey());
         }
+
         return res;
     }
 

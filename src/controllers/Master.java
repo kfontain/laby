@@ -48,7 +48,7 @@ public class Master {
 
     public void render(){
         for(int[] wall : GameManager.getMaze().getWalls()) {
-            ViewFrame.drawWall(wall[0], wall[1], wall[2], wall[3], Color.BURLYWOOD);
+             ViewFrame.drawWall(wall[0], wall[1], wall[2], wall[3], Color.BURLYWOOD);
         }
         for(int[] door : GameManager.getMaze().getDoors(true)) {
             ViewFrame.drawWall(door[0], door[1], door[2], door[3], Color.GREEN);
