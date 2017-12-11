@@ -45,7 +45,10 @@ public class Character extends Entity{
         case NORTH:
             moveUp();
             break;
-    }
+    	default:
+    		break;
+    	}
+    	
     }
 
     @Override

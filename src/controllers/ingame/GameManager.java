@@ -17,12 +17,12 @@ public class GameManager {
     private static Maze maze;
 
     private static Character player = null;
-    private static LinkedList<Character>  NPCs = null;
+    private static LinkedList<Character>  npcs = null;
     private static int nbBonus;
 
     public static void initialize() {
         entities = new LinkedList<>();
-        NPCs = new LinkedList<>();
+        npcs = new LinkedList<>();
         random = new Random();
         nbBonus = 0;
         maze = maze.getInstance();
@@ -32,7 +32,7 @@ public class GameManager {
         if (entity.getType() == EntityType.PLAYER)
             setPlayer((Character) entity);
         else if(entity.getType() == EntityType.NPC)
-        	NPCs.push((Character)entity);
+        	npcs.push((Character)entity);
 
         entities.push(entity);
     }
@@ -66,7 +66,7 @@ public class GameManager {
     }
     
     public static void tryMoveNPCs() {
-        for(Character npc : NPCs) {
+        for(Character npc : npcs) {
         	Direction dir = maze.getDirectionForNPC(npc.getX(), npc.getY());
         	boolean hasMoved = tryMoveCharacter(npc, dir);
         	EventManager.manageCollision();
@@ -78,21 +78,7 @@ public class GameManager {
         int y = character.getY();
         boolean able = !maze.getWallsAt(x, y).contains(direction);
         if (able) {
-        	//character.move(direction);
-            switch (direction) {
-                case EAST:
-                    character.moveRight();
-                    break;
-                case SOUTH:
-                    character.moveDown();
-                    break;
-                case WEST:
-                    character.moveLeft();
-                    break;
-                case NORTH:
-                    character.moveUp();
-                    break;
-            }
+        	character.move(direction);
             EventManager.manageCollision();
             maze.updateDistFromPlayer(getPlayer().getX(), GameManager.getPlayer().getY());
             /*
