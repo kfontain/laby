@@ -109,29 +109,31 @@ public class Graph {
     private void unMarkVertex() {
     	for(int j = 0; j < sizeY; j++) {
     		for(int i = 0; i < sizeX; i++) {
-    			getVertex(i, j).setMark(false);
+    			vertexes[i][j].setMark(false);
     		}
     	}
     }
-    
+
+    //
     private void markAccessVertex(int i, int j, int value) {
     	Vertex v = getVertex(i, j);
     	
     	Vector<Vertex> neigh = v.getNeighbours();
     	for(Vertex n : neigh) {
     		if(!n.isMarked()) {
-    			n.setDistFromPlayer(value + 1);
+    			n.setDistFromPlayer(value + 1); // Changer le nom, ca doit etre FromObjectif ...
     			n.setMark(true);
     			markAccessVertex(n.getX(), n.getY(), value + 1);
     		}
     	}
     	
     }
-    
+
+    //Permet d'obtenir les distances entre un sommet (x,y) et les autres
     public void updateDistanceFromPlayer(int x, int y) {
     	unMarkVertex();
-    	getVertex(x, y).setDistFromPlayer(0);
-    	getVertex(x, y).setMark(true);
+    	vertexes[x][y].setDistFromPlayer(0);
+        vertexes[x][y].setMark(true);
     	markAccessVertex(x, y, 0);
     }
     
