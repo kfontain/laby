@@ -22,8 +22,8 @@ public class Maze {
 
 	public void initializeGraph(int x, int y){
 		g = new Graph();
-		g.setSizeX(10);
-		g.setSizeY(10);
+		g.setSizeX(x);
+		g.setSizeY(y);
 		g.createVertexArray();
 		g.generateMazeGraph();
 		//g.drawMazeOnConsole();

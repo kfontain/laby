@@ -28,10 +28,10 @@ public class Master {
 
     public void start(Stage primaryStage) {
         GameManager.initialize();
-        GameManager.getMaze().initializeGraph(10, 10);
+        GameManager.getMaze().initializeGraph(20, 20);
         SpriteManager.initialize("res");
 
-        ViewFrame.drawFrame(primaryStage, 10, 10);
+        ViewFrame.drawFrame(primaryStage, 20, 20);
         for(int[] wall : GameManager.getMaze().getWalls()) {
             ViewFrame.drawWall(wall[0], wall[1], wall[2], wall[3], Color.BURLYWOOD);
     }
