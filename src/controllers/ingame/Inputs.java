@@ -13,6 +13,7 @@ import views.ViewFrame;
 public class Inputs implements EventHandler<KeyEvent>{
 
     @Override
+    // TODO A BOUGER !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     public void handle(KeyEvent event) {
     	boolean hasMoved;
         switch (event.getCode()){

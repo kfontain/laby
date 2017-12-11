@@ -10,7 +10,7 @@ public class Vertex {
     private int x;
     private int y;
     private Graph graph;
-    private int distFromPlayer;
+    private int dist;
     private boolean isMarked;
 
     public Vector<Edge> getEdges() {
@@ -22,7 +22,7 @@ public class Vertex {
     public Vertex(Graph graph) {
         this.graph = graph;
         edges = new Vector<>();
-        setDistFromPlayer(-1);
+        dist = -1;
         isMarked = false;
     }
     
@@ -214,12 +214,12 @@ public class Vertex {
         return res;
     }
 
-	public int getDistFromPlayer() {
-		return distFromPlayer;
+	public int getDist() {
+		return dist;
 	}
 
-	public void setDistFromPlayer(int distFromPlayer) {
-		this.distFromPlayer = distFromPlayer;
+	public void setDist(int dist) {
+		this.dist = dist;
 	}
 
 }

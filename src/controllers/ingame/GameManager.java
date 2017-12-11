@@ -65,12 +65,61 @@ public class GameManager {
         nbBonus += 1;
     }
     
+    private static boolean isNPC(int x, int y, Direction d) {
+    	int newX = x;
+    	int newY = y;
+    	switch(d) {
+    		case EAST:
+    			newX = x + 1;
+    			break;
+    		case WEST:
+    			newX = x - 1;
+    			break;
+    		case NORTH:
+    			newY = y - 1;
+    			break;
+    		case SOUTH:
+    			newY = y + 1;
+    			break;
+    		default:
+    			return false;
+    	}
+    	for(Character npc : npcs) {
+    		if(npc.getX() == newX && npc.getY() == newY)
+    			return true;
+    	}
+    	return false;
+    }
+    
     public static void tryMoveNPCs() {
-        for(Character npc : npcs) {
-        	Direction dir = maze.getDirectionForNPC(npc.getX(), npc.getY());
-        	boolean hasMoved = tryMoveCharacter(npc, dir);
-        	EventManager.manageCollision();
-        }
+    	LinkedList<Character> stackChar = new LinkedList<>();
+    	int[] bitmap = new int[npcs.size()];
+    	int i = 0;
+    	for(Character npc: npcs) {
+    		stackChar.add(npc);
+    		bitmap[i] = 0;
+    		i++;
+    	}
+    	
+    	boolean hasMoved = true;
+    	while(hasMoved) {
+    		hasMoved = false;
+	        for(Character npc : stackChar) {
+	        	if(bitmap[stackChar.indexOf(npc)] == 1)
+	        		continue;
+	        	Direction dir = maze.getDirectionForNPC(npc.getX(), npc.getY());
+	        	//boolean canMove = isNPC(x, y, dir);
+	        	if(dir != null) {
+	        		boolean isNPC = isNPC(npc.getX(), npc.getY(), dir);
+	        		if(!isNPC) {
+	        			hasMoved = tryMoveCharacter(npc, dir);
+	        			if(hasMoved)
+	        				bitmap[stackChar.indexOf(npc)] = 1;
+	        				//stackChar.remove(npc);
+	        		}
+	        	}
+	        }
+    	}
     }
 
     public static boolean tryMoveCharacter(Character character, Direction direction){
@@ -79,14 +128,8 @@ public class GameManager {
         boolean able = !maze.getWallsAt(x, y).contains(direction);
         if (able) {
         	character.move(direction);
-            EventManager.manageCollision();
-            maze.updateDistFromPlayer(getPlayer().getX(), GameManager.getPlayer().getY());
-            /*
-            for(Character npc : NPCs) {
-            	Direction dir = maze.getDirectionForNPC(npc.getX(), npc.getY());
-            	npc.move(dir);
-            }
-            */
+        	if(character.getType() == EntityType.PLAYER)
+        		maze.updateDistFromPlayer(getPlayer().getX(), GameManager.getPlayer().getY());
             EventManager.manageCollision();
 
             
