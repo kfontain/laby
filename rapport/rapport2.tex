@@ -1,0 +1,141 @@
+%-------------------------------------------------------------------------------
+% COMPILATION
+% pdflatex -shell-escape <fichier.tex>
+%-------------------------------------------------------------------------------
+
+\documentclass[a4paper]{article}
+
+%% Language and font encodings
+\usepackage[frenchb]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{minted} %compiler avec la commande -shell-escape
+\usepackage{graphicx}
+
+\usepackage{enumitem,amssymb}
+\newlist{todolist}{itemize}{2}
+\setlist[todolist]{label=$\square$}
+\usepackage{pifont}
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+\newcommand{\done}{\rlap{$\square$}{\raisebox{2pt}{\large\hspace{1pt}\cmark}}%
+\hspace{-2.5pt}}
+\newcommand{\wontfix}{\rlap{$\square$}{\large\hspace{1pt}\xmark}}
+\newcommand*{\escape}[1]{\texttt{\textbackslash#1}}
+\newcommand*{\escapeI}[1]{\texttt{\expandafter\string\csname #1\endcsname}}
+\newcommand*{\escapeII}[1]{\texttt{\char`\\#1}}
+
+%% Sets page size and margins
+\usepackage[a4paper,top=3cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+\setlength{\parskip}{.5em}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+%-------------------------------------------------------------------------------
+% TITLE PAGE
+%-------------------------------------------------------------------------------
+
+\title
+{
+	\LARGE{Projet Approche Objet}
+	\HRule \\ [0.5cm]
+	\LARGE \textbf{\uppercase{Un jeu de plateau Labyrinthe}}
+	\HRule \\ [0.5cm]
+}
+
+\author{Guillaume CHARLET \\ Kenji FONTAINE \\ Romain ORDONEZ \\ Adrien HALNAUT}
+
+\begin{document}
+
+\null  % Empty line
+\nointerlineskip  % No skip for prev line
+\vfill
+\let\snewpage \newpage
+\let\newpage \relax
+\maketitle
+\let \newpage \snewpage
+\vfill
+\break % page break
+
+%-------------------------------------------------------------------------------
+% Table of Contents
+%-------------------------------------------------------------------------------
+
+\tableofcontents
+\newpage
+
+%-------------------------------------------------------------------------------
+% Introduction
+%-------------------------------------------------------------------------------
+
+\section{Description du projet}
+Ce travail a été réalisé dans un cadre universitaire,  par des étudiants en
+Master 1 informatique à l'université de Bordeaux.
+Le but de ce projet est de mettre en pratique les connaissances acquises lors
+du cours d'Approche Objet. \\
+Labyrinth est un jeu de plateau dans lequel le joueur peut se déplacer et devra
+trouver la sortie dans un labyrinthe en franchissant divers obstacles.
+
+%-------------------------------------------------------------------------------
+% Description du travail
+%-------------------------------------------------------------------------------
+
+\section{Description du travail}
+
+\subsection{Première séance}
+Lors de la première séance, nous avons réfléchi sur la structure qu'allait
+prendre notre code. Nous nous sommes mis d'accord pour partir sur une
+architecture MVC (modèle, vue et contrôleur) afin de disposer d'une certaine
+flexibilité. Nous avons ensuite déterminer sur papier, la hiérarchie de nos
+classes, packages, etc... Puis nous nous sommes réparti le travail en groupe. \\
+Voici le premier modèle retenu :
+\begin{itemize}
+
+	\item Model \begin{itemize}
+		\item Drawable \begin{itemize}
+			\item Gentil
+			\item Mechant
+		\end{itemize}
+		\item Static \begin{itemize}
+			\item Switches
+			\item Doors
+			\item Bonus
+		\end{itemize}
+		\item Game core \begin{itemize}
+			\item Laby/Graph
+			\item Menu
+		\end{itemize}
+	\end{itemize}
+
+	\item View \begin{itemize}
+		\item Rien pour l'instant
+	\end{itemize}
+
+	\item Controller \begin{itemize}
+		\item Main/Master
+		\item In-Game \begin{itemize}
+			\item Inputs
+			\item Events
+			\item GameManager
+		\end{itemize}
+	\end{itemize}
+
+\end{itemize}
+
+\subsection{Premier pas}
+Nous avons commencé notre implémentation par la génération de graphe (modèle)
+ainsi que l'affichage de la grille (vue).
+
+%-------------------------------------------------------------------------------
+%
+%-------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------
+%
+%-------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------
+% END
+%-------------------------------------------------------------------------------
+
+\end{document}
