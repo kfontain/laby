@@ -4,6 +4,8 @@ import models.game.Direction;
 import models.game.WallType;
 
 import java.io.Console;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Random;
 import java.util.Vector;
 
@@ -66,25 +68,31 @@ public class Graph {
     }
 
     //
-    private void markAccessVertex(int i, int j, int value) {
-    	Vertex v = getVertex(i, j);
-    	
-    	Vector<Vertex> neigh = v.getNeighbours();
-    	for(Vertex n : neigh) {
-    		if(!n.isMarked()) {
-    			n.setDist(value + 1);
-    			n.setMark(true);
-    			markAccessVertex(n.getX(), n.getY(), value + 1);
-    		}
-    	}
+    private void markAccessVertex(int i, int j) {
+    	Vertex v = vertexes[i][j];
+    	ArrayList<Vertex> queue = new ArrayList<>();
+    	queue.add(v);
+    	v.setDist(0);
+
+    	while(!queue.isEmpty()){
+    	    v = queue.get(0);
+            v.setMark(true);
+            int value = v.getDist();
+
+            Vector<Vertex> neigh = v.getNeighbours();
+            queue.remove(v);
+            for(Vertex n : neigh)
+                if(!n.isMarked()) {
+                    n.setDist(value + 1);
+                    queue.add(n);
+                }
+        }
     }
 
     //Permet d'obtenir les distances entre un sommet (x,y) et les autres
     public void updateDistanceFromVertex(int x, int y) {
     	unmarkVertex();
-    	vertexes[x][y].setDist(0);
-        vertexes[x][y].setMark(true);
-    	markAccessVertex(x, y, 0);
+    	markAccessVertex(x, y);
     }
     
     // =========================================================================

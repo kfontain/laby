@@ -127,7 +127,7 @@ public class Maze {
 	public void updateDistFromPlayer(int x, int y) {
 		g.updateDistanceFromVertex(x, y);
 		//g.drawGraphOnConsole();
-		//g.drawGraphWithValuesOnConsole(); // origin distance starts at 10 just for the display.
+		g.drawGraphWithValuesOnConsole(); // origin distance starts at 10 just for the display.
 		//g.drawMazeOnConsole();
 	}
 	
