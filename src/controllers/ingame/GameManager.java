@@ -142,8 +142,12 @@ public class GameManager {
         return able;
     }
 
-    public static void callNextTurn(){
-        EventManager.manageCollision();
+    public static void callNextTurn(boolean success){
+        if (success){
+            tryMoveNPCs();
+            EventManager.manageCollision();
+        }
+
         cleanTurn();
         Master.getInstance().render();
     }
