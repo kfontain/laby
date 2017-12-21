@@ -159,4 +159,10 @@ public class Graph {
             System.out.println("");
         }
     }
+
+    public void removeEdge(Edge edge) {
+        //edge.setWallType(WallType.OPENED_DOOR);
+        for (Vertex v : edge.getVertexes())
+            v.removeEdge(edge);
+    }
 }
