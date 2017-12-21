@@ -3,6 +3,8 @@ package views;
 import controllers.ingame.GameManager;
 import controllers.ingame.Inputs;
 import controllers.ingame.SpriteManager;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -14,6 +16,7 @@ import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
+import javafx.util.Duration;
 import models.drawable.Entity;
 import models.drawable.SpriteType;
 
@@ -32,9 +35,19 @@ public class ViewFrame {
     public static final Color WALL_COLOR = Color.BURLYWOOD;
     private static Pane pane = new Pane();
     private static Vector<Node> drawnEntities;
+    private static Timeline animator;
+
+    public static void setIsAnimating(boolean isAnimating) {
+        ViewFrame.isAnimating = isAnimating;
+        animator.play();
+    }
+
+    private static boolean isAnimating = false;
 
     private ViewFrame() {
         drawnEntities = new Vector<>();
+        animator = new Timeline(new KeyFrame(Duration.millis(16), event -> ViewFrame.drawEntities()));
+        animator.setCycleCount(5);
     }
 
     public static void drawFrame(Stage stage, int nbrX, int nbrY) {
@@ -113,10 +126,13 @@ public class ViewFrame {
     }
 
     public static void drawEntities(){
+        if (!isAnimating){
+            return;
+        }
         LinkedList<Entity> entities = GameManager.getEntities();
         cleanEntities();
         for (Entity e : entities){
-            e.updateFloatingValues(true);
+            isAnimating = e.updateFloatingValues(true) || isAnimating;
             SpriteType t = e.getSpriteType();
             drawSprite(e.getDoubleX(), e.getDoubleY(), SpriteManager.getSprite(t));
         }

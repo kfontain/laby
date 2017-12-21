@@ -74,9 +74,9 @@ public abstract class Entity {
         isMoving = moving;
     }
 
-    public void updateFloatingValues(boolean lerp) {
+    public boolean updateFloatingValues(boolean lerp) {
         if (!isMoving)
-            return;
+            return false;
 
         double vx = (lerp ? 0.2 : 1 - (getX() - getDoubleX()));
         double vy = (lerp ? 0.2 : 1 - (getY() - getDoubleY()));
@@ -101,6 +101,8 @@ public abstract class Entity {
             x = toX;
             y = toY;
         }
+
+        return true;
     }
 
     public void setX(int x) {

@@ -56,15 +56,7 @@ public class Master {
 
         EntitySpawner.spawnDoorAtRandomPosition();
 
-        Timeline fiveSecondsWonder = new Timeline(new KeyFrame(Duration.millis(30), new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent event) {
-                render();
-            }
-        }));
-        fiveSecondsWonder.setCycleCount(Timeline.INDEFINITE);
-        fiveSecondsWonder.play();
+        render();
     }
 
     public void render(){
@@ -79,7 +71,7 @@ public class Master {
             ViewFrame.drawWall(door[0], door[1], door[2], door[3], Color.RED);
         }
 
-        ViewFrame.drawEntities();
+        ViewFrame.setIsAnimating(true);
     }
     
     public void stop() {
