@@ -30,6 +30,11 @@ public class Character extends Entity{
     public void moveLeft(){
         setX(getX() - 1);
     }
+
+    public void moveLerp(Direction direction){
+        setMovingToward(direction);
+        setMoving(true);
+    }
     
     public void move(Direction d) {
     	switch (d) {

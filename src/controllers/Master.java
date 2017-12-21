@@ -5,8 +5,13 @@ import java.util.ArrayList;
 import controllers.ingame.EntitySpawner;
 import controllers.ingame.GameManager;
 import controllers.ingame.SpriteManager;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import models.drawable.Character;
 import models.drawable.Entity;
 import models.game.maze.Maze;
@@ -51,8 +56,15 @@ public class Master {
 
         EntitySpawner.spawnDoorAtRandomPosition();
 
-        render();
+        Timeline fiveSecondsWonder = new Timeline(new KeyFrame(Duration.millis(30), new EventHandler<ActionEvent>() {
 
+            @Override
+            public void handle(ActionEvent event) {
+                render();
+            }
+        }));
+        fiveSecondsWonder.setCycleCount(Timeline.INDEFINITE);
+        fiveSecondsWonder.play();
     }
 
     public void render(){

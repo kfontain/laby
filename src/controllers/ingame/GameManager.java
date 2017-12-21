@@ -131,7 +131,9 @@ public class GameManager {
         int y = character.getY();
         boolean able = !maze.getWallsAt(x, y).contains(direction) && !maze.getDoorsAt(x, y, false).contains(direction);
         if (able) {
-        	character.move(direction);
+        	//character.move(direction);
+            character.updateFloatingValues(true);
+            character.moveLerp(direction);
         	if(character.getType() == EntityType.PLAYER)
         		maze.updateDistFromPlayer(getPlayer().getX(), GameManager.getPlayer().getY());
 

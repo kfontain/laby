@@ -101,9 +101,9 @@ public class ViewFrame {
         return vf;
     }
 
-    public static void drawSprite(int x, int y, Image sprite){
-        int xf = WALL * (x + 1) + CELL * x;
-        int yf = WALL * (y + 1) + CELL * y;
+    public static void drawSprite(double x, double y, Image sprite){
+        double xf = WALL * (x + 1) + CELL * x;
+        double yf = WALL * (y + 1) + CELL * y;
         Canvas canvas = new Canvas(CELL * SPAN, CELL * SPAN);
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.drawImage(sprite, 0, 0);
@@ -116,8 +116,9 @@ public class ViewFrame {
         LinkedList<Entity> entities = GameManager.getEntities();
         cleanEntities();
         for (Entity e : entities){
+            e.updateFloatingValues(true);
             SpriteType t = e.getSpriteType();
-            drawSprite(e.getX(), e.getY(), SpriteManager.getSprite(t));
+            drawSprite(e.getDoubleX(), e.getDoubleY(), SpriteManager.getSprite(t));
         }
 
         renderEntities();
