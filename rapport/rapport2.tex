@@ -82,32 +82,46 @@ Description de Main
 \textbf{Master :} Description de Master.
 
 \textbf{ingame :} \begin{itemize}
-	\item{EntitySpawner}
-	\item{EventManager}
-	\item{GameManager}
-	\item{Inputs}
-	\item{SpriteManager}
+	\item{EntitySpawner : Instancie les entités du dossier drawable
+	avec une position aléatoire.}
+	\item{EventManager : S'occupe de détecter et de gérer les collisions entre
+	entités (entre le joueur et un ennemi par exemple).}
+	\item{GameManager : Gère le déroulement du jeu. Initialisation, gestion des
+	déplacements des entités, ainsi que leur destruction (si un bonus est
+	ramassé par exemple).}
+	\item{Inputs : Reçoit les entrées utilisateurs afin de déplacer le joueur
+	dans le labyrinthe.}
+	\item{SpriteManager : Permet de récupérer les images utilisées dans
+	l'interface graphique.}
 \end{itemize}
 
 \subsubsection{models}
 \textbf{drawable :} \begin{itemize}
-	\item{Bonus}
-	\item{Character}
-	\item{Door}
-	\item{Entity}
-	\item{EntityType}
-	\item{OnOff}
-	\item{SpriteType}
+	\item{Bonus : Classe des bonbons ramassables par le joueur.}
+	\item{Character : Classe utilisée par le joueur ainsi que les ennemis. On
+	distingue le joueur des ennemis à l'aide d'un booléen.}
+	\item{Door : Classe de la porte de sortie utilisée dans le labyrinthe.}
+	\item{Entity : Classe abstraite héritée par toutes les autres entités. Elle
+	définie le fonctionnement générale d'une entité.}
+	\item{EntityType : Enumération des différentes entités pouvant être
+	utilisées dans le jeu.}
+	\item{OnOff : Classe des boutons permettant d'activer/désactiver un mur dans
+	lebyrinthe.}
+	\item{SpriteType : Enumérations des différentes images pouvant être
+	associées à une entité dans le jeu.}
 \end{itemize}
 
 \textbf{game :} \begin{itemize}
-	\item{maze/Direction}
-	\item{maze/Menu}
-	\item{maze/WallType}
+	\item{maze/Direction : Enumération des directions différentes qu'un
+	mouvement peut prendre.}
+	\item{maze/Menu : Classe du Menu, non utilisée.}
+	\item{maze/WallType : Enumération des différents états qu'un mur peut
+	prendre.}
 \end{itemize}
 
 \subsubsection{views}
-\textbf{ViewFrame :} Description de ViewFrame.
+\textbf{ViewFrame :} Permet d'initialiser l'interface graphique ainsi que de
+mettre l'affichage des entités à jour à chaque déplacement.
 
 %-------------------------------------------------------------------------------
 % Description du travail
