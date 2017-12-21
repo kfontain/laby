@@ -48,5 +48,5 @@ public abstract class Entity {
         return (this.x == e.x && this.y == e.y);
     }
 
-    public abstract void eventCollision();
+    public abstract void eventCollision(Entity collider);
 }

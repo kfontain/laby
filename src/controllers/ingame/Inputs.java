@@ -38,8 +38,7 @@ public class Inputs implements EventHandler<KeyEvent>{
         	GameManager.tryMoveNPCs();
         }
 
-        Master.getInstance().render();
-        return;
+        GameManager.callNextTurn();
     }
 
 }

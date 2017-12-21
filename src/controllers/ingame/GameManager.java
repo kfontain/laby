@@ -1,11 +1,13 @@
 package controllers.ingame;
 
+import controllers.Master;
 import models.drawable.Character;
 import models.drawable.Entity;
 import models.drawable.EntityType;
 import models.game.Direction;
 import models.game.maze.Maze;
 
+import java.beans.EventHandler;
 import java.util.LinkedList;
 import java.util.Random;
 
@@ -19,6 +21,7 @@ public class GameManager {
     private static Character player = null;
     private static LinkedList<Character>  npcs = null;
     private static int nbBonus;
+    private static LinkedList<Entity> toBeCleared;
 
     public static void initialize() {
         entities = new LinkedList<>();
@@ -26,6 +29,7 @@ public class GameManager {
         random = new Random();
         nbBonus = 0;
         maze = maze.getInstance();
+        toBeCleared = new LinkedList<>();
     }
 
     public static void addEntity(Entity entity){
@@ -46,7 +50,7 @@ public class GameManager {
     }
 
     public static void removeEntity(Entity entity){
-        entities.remove(entity);
+        toBeCleared.add(entity);
     }
 
     public static LinkedList<Entity> getEntities(){
@@ -130,10 +134,22 @@ public class GameManager {
         	character.move(direction);
         	if(character.getType() == EntityType.PLAYER)
         		maze.updateDistFromPlayer(getPlayer().getX(), GameManager.getPlayer().getY());
-            EventManager.manageCollision();
 
             
         }
         return able;
+    }
+
+    public static void callNextTurn(){
+        EventManager.manageCollision();
+        cleanTurn();
+        Master.getInstance().render();
+    }
+
+    private static void cleanTurn(){
+        for (Entity e : toBeCleared)
+            entities.remove(e);
+
+        toBeCleared.clear();
     }
 }
