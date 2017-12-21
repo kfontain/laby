@@ -32,7 +32,6 @@ public class Master {
         SpriteManager.initialize("res");
 
         ViewFrame.drawFrame(primaryStage, 10, 10);
-
         EntitySpawner.spawnPlayerAtRandomPosition();
         Entity player = GameManager.getPlayer();
         
@@ -51,6 +50,9 @@ public class Master {
         EntitySpawner.spawnCandyAtRandomPosition();
 
         EntitySpawner.spawnDoorAtRandomPosition();
+
+        render();
+
     }
 
     public void render(){
