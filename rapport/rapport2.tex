@@ -11,19 +11,8 @@
 \usepackage[T1]{fontenc}
 \usepackage{minted} %compiler avec la commande -shell-escape
 \usepackage{graphicx}
-
-\usepackage{enumitem,amssymb}
-\newlist{todolist}{itemize}{2}
-\setlist[todolist]{label=$\square$}
-\usepackage{pifont}
-\newcommand{\cmark}{\ding{51}}%
-\newcommand{\xmark}{\ding{55}}%
-\newcommand{\done}{\rlap{$\square$}{\raisebox{2pt}{\large\hspace{1pt}\cmark}}%
-\hspace{-2.5pt}}
-\newcommand{\wontfix}{\rlap{$\square$}{\large\hspace{1pt}\xmark}}
-\newcommand*{\escape}[1]{\texttt{\textbackslash#1}}
-\newcommand*{\escapeI}[1]{\texttt{\expandafter\string\csname #1\endcsname}}
-\newcommand*{\escapeII}[1]{\texttt{\char`\\#1}}
+\usepackage{titlesec}
+\usepackage{hyperref}
 
 %% Sets page size and margins
 \usepackage[a4paper,top=3cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
@@ -77,9 +66,54 @@ Labyrinth est un jeu de plateau dans lequel le joueur peut se déplacer et devra
 trouver la sortie dans un labyrinthe en franchissant divers obstacles.
 
 %-------------------------------------------------------------------------------
+% Architecture du code
+%-------------------------------------------------------------------------------
+
+\section{Architecture du code}
+
+Le dossier src contient notre code source pour le projet, réparti dans
+différents sous-dossiers. On y trouve également Main, qui est éxécuté lorsque
+le programme est lancé.
+
+\subsection{Main}
+Description de Main
+
+\subsubsection{controllers}
+\textbf{Master :} Description de Master.
+
+\textbf{ingame :} \begin{itemize}
+	\item{EntitySpawner}
+	\item{EventManager}
+	\item{GameManager}
+	\item{Inputs}
+	\item{SpriteManager}
+\end{itemize}
+
+\subsubsection{models}
+\textbf{drawable :} \begin{itemize}
+	\item{Bonus}
+	\item{Character}
+	\item{Door}
+	\item{Entity}
+	\item{EntityType}
+	\item{OnOff}
+	\item{SpriteType}
+\end{itemize}
+
+\textbf{game :} \begin{itemize}
+	\item{maze/Direction}
+	\item{maze/Menu}
+	\item{maze/WallType}
+\end{itemize}
+
+\subsubsection{views}
+\textbf{ViewFrame :} Description de ViewFrame.
+
+%-------------------------------------------------------------------------------
 % Description du travail
 %-------------------------------------------------------------------------------
 
+\section*{} % Sinon compile pas
 \section{Description du travail}
 
 \subsection{Première séance}
