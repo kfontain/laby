@@ -5,8 +5,13 @@ import java.util.ArrayList;
 import controllers.ingame.EntitySpawner;
 import controllers.ingame.GameManager;
 import controllers.ingame.SpriteManager;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import models.drawable.Character;
 import models.drawable.Entity;
 import models.game.maze.Maze;
@@ -28,11 +33,10 @@ public class Master {
 
     public void start(Stage primaryStage) {
         GameManager.initialize();
-        GameManager.getMaze().initializeGraph(10, 10);
+        GameManager.getMaze().initializeGraph(10, 10, 20);
         SpriteManager.initialize("res");
 
         ViewFrame.drawFrame(primaryStage, 10, 10);
-
         EntitySpawner.spawnPlayerAtRandomPosition();
         Entity player = GameManager.getPlayer();
         
@@ -51,6 +55,8 @@ public class Master {
         EntitySpawner.spawnCandyAtRandomPosition();
 
         EntitySpawner.spawnDoorAtRandomPosition();
+
+        render();
     }
 
     public void render(){
@@ -65,7 +71,7 @@ public class Master {
             ViewFrame.drawWall(door[0], door[1], door[2], door[3], Color.RED);
         }
 
-        ViewFrame.drawEntities();
+        ViewFrame.setIsAnimating(true);
     }
     
     public void stop() {

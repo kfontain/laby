@@ -25,10 +25,22 @@ public class OnOff extends Entity {
     }
 
     @Override
-    public void eventCollision() {
-        isOpen = !isOpen;
-        this.edge.setWallType(isOpen ? WallType.OPENED_DOOR : WallType.CLOSED_DOOR);
-        setSpriteType(isOpen ? SpriteType.SWITCH_ON : SpriteType.SWITCH_OFF);
+    public void eventCollision(Entity collider) {
+        switch (collider.getType()) {
+            case PLAYER:
+                isOpen = !isOpen;
+                this.edge.setWallType(isOpen ? WallType.OPENED_DOOR : WallType.CLOSED_DOOR);
+                setSpriteType(isOpen ? SpriteType.SWITCH_ON : SpriteType.SWITCH_OFF);
+                break;
+            case NPC:
+                break;
+            case DOOR:
+                break;
+            case ONOFF:
+                break;
+            case BONUS:
+                break;
+        }
     }
 
 }

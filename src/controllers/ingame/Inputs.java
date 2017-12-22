@@ -17,6 +17,9 @@ public class Inputs implements EventHandler<KeyEvent>{
     // TODO A BOUGER !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     public void handle(KeyEvent event) {
     	boolean hasMoved;
+    	if (GameManager.getPlayer().isMoving())
+    	    return;
+
         switch (event.getCode()){
             case UP:
             	hasMoved = GameManager.tryMoveCharacter(GameManager.getPlayer(), Direction.NORTH);
@@ -34,12 +37,8 @@ public class Inputs implements EventHandler<KeyEvent>{
             	hasMoved = false;
                 break;
         }
-        if(hasMoved) {
-        	GameManager.tryMoveNPCs();
-        }
 
-        Master.getInstance().render();
-        return;
+        GameManager.callNextTurn(hasMoved);
     }
 
 }

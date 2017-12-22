@@ -26,12 +26,15 @@ public class Maze {
 		return maze;
 	}
 
-	public void initializeGraph(int x, int y){
+	public void initializeGraph(int x, int y, int difficulty){
 		g = new Graph();
 		g.setSizeX(x);
 		g.setSizeY(y);
 		g.createVertexArray();
 		g.generateMazeGraph();
+		for (int i = 0; i < difficulty; i++)
+		    getRandomEdge().setWallType(WallType.PATH);
+
 		g.drawMazeOnConsole();
 	}
 
@@ -124,7 +127,7 @@ public class Maze {
 	public void updateDistFromPlayer(int x, int y) {
 		g.updateDistanceFromVertex(x, y);
 		//g.drawGraphOnConsole();
-		//g.drawGraphWithValuesOnConsole(); // origin distance starts at 10 just for the display.
+		g.drawGraphWithValuesOnConsole(); // origin distance starts at 10 just for the display.
 		//g.drawMazeOnConsole();
 	}
 	
@@ -153,15 +156,16 @@ public class Maze {
 	}
 
 	public Edge getRandomEdge() {
-		int x = random.nextInt(g.getSizeX());
-		int y = random.nextInt(g.getSizeY());
-		Collection<Edge> edges = this.g.getVertex(x,y).getEdges().values();
-		for (Edge e : edges) {
-			if (e.getWallType() == WallType.WALL || e.getWallType() == WallType.CLOSED_DOOR)
-				return e;
-		}
-
-		return null;
+	    while(true){
+            int x = random.nextInt(g.getSizeX());
+            int y = random.nextInt(g.getSizeY());
+            Collection<Edge> edges = this.g.getVertex(x,y).getEdges().values();
+            for (Edge e : edges) {
+                if (e.getWallType() == WallType.WALL || e.getWallType() == WallType.CLOSED_DOOR) {
+                    return e;
+                }
+            }
+        }
 	}
 
     public Vector<Direction> getDoorsAt(int x, int y, boolean isClosed) {

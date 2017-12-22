@@ -69,6 +69,7 @@ public class Vertex {
                 int xt = 0;
                 int yt = 0;
                 Edge ne = new Edge();
+                ne.addVertex(this);
                 ne.setWallType(WallType.PATH);
                 switch (currentDirection) {
                     case EAST:
@@ -88,16 +89,21 @@ public class Vertex {
                 Vertex v = new Vertex(graph);
                 v.setX(x + xt);
                 v.setY(y + yt);
-                if (isPossibleToMove(currentDirection) && graph.getVertex(v.getX(), v.getY()) == null){
+                boolean hw = !isPossibleToMove(currentDirection);
+                if (!hw && graph.getVertex(v.getX(), v.getY()) == null){
                     graph.addVertex(v);
                     this.addEdge(currentDirection, ne);
+                    ne.addVertex(v);
                     v.addEdge(currentDirection.getOppositeDirection(), ne);
                     v.randomizePaths(random);
                 }else{
-                        ne.setWallType(WallType.WALL);
+                        ne.setWallType((hw ? WallType.HARD_WALL : WallType.WALL));
                         this.addEdge(currentDirection, ne);
-                        if (v.getX() >= 0 && v.getX() < graph.getSizeX() && v.getY() >= 0 && v.getY() < graph.getSizeY())
-                            graph.getVertex(v.getX(), v.getY()).edges.put(currentDirection.getOppositeDirection(), ne);
+                        if (!hw){
+                            v = graph.getVertex(v.getX(), v.getY());
+                            ne.addVertex(v);
+                            v.edges.put(currentDirection.getOppositeDirection(), ne);
+                        }
                 }
             }
         }
@@ -119,11 +125,11 @@ public class Vertex {
     }
 
     public boolean isLinkedTo(Direction d){
-        return edges.get(d).getWallType() == WallType.PATH || edges.get(d).getWallType() == WallType.OPENED_DOOR;
+        return edges.containsKey(d) && edges.get(d).getWallType() == WallType.PATH || edges.get(d).getWallType() == WallType.OPENED_DOOR;
     }
     
     public Direction getDirectionTo(Vertex dest) {
-    	for(Direction d : Direction.values()) {
+    	for(Direction d : edges.keySet()) {
     		if(isLinkedTo(d)) {
 				switch(d) {
 				case EAST:
@@ -152,7 +158,7 @@ public class Vertex {
     public Vector<Vertex> getNeighbours(){
     	Vector<Vertex> neigh = new Vector<>();
     	
-    	for(Direction d : Direction.values()) {
+    	for(Direction d : edges.keySet()) {
     		if(isLinkedTo(d)) {
 				switch(d) {
 				case EAST:
@@ -191,7 +197,7 @@ public class Vertex {
 
         Vector<Direction> res = new Vector<>();
         for (Map.Entry<Direction, Edge> e : edges.entrySet()){
-            if (e.getValue().getWallType() == WallType.WALL)
+            if (e.getValue().getWallType() == WallType.WALL || e.getValue().getWallType() == WallType.HARD_WALL)
                 res.add(e.getKey());
         }
 
@@ -217,4 +223,12 @@ public class Vertex {
 	public void setDist(int dist) {
 		this.dist = dist;
 	}
+
+    public void removeEdge(Edge edge) {
+        for (Map.Entry<Direction, Edge> e : edges.entrySet())
+            if (e.getValue() == edge){
+                edges.remove(e.getKey());
+                return;
+            }
+    }
 }

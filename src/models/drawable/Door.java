@@ -14,8 +14,21 @@ public class Door extends Entity{
     }
 
     @Override
-    public void eventCollision() {
-        System.out.println("Sortie");
+    public void eventCollision(Entity collider)
+    {
+        switch (collider.getType()) {
+            case PLAYER:
+                System.out.println("Sortie");
+                break;
+            case NPC:
+                break;
+            case DOOR:
+                break;
+            case ONOFF:
+                break;
+            case BONUS:
+                break;
+        }
     }
 }
 

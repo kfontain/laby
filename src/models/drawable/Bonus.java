@@ -22,9 +22,21 @@ public class Bonus extends Entity{
     }
 
     @Override
-    public void eventCollision() {
-        GameManager.addNbBonus();
-        GameManager.removeEntity(this);
+    public void eventCollision(Entity collider) {
+        switch (collider.getType()) {
+            case PLAYER:
+                GameManager.addNbBonus();
+                GameManager.removeEntity(this);
+                break;
+            case NPC:
+                break;
+            case DOOR:
+                break;
+            case ONOFF:
+                break;
+            case BONUS:
+                break;
+        }
     }
 }
 

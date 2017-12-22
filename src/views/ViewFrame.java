@@ -3,6 +3,8 @@ package views;
 import controllers.ingame.GameManager;
 import controllers.ingame.Inputs;
 import controllers.ingame.SpriteManager;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -14,6 +16,7 @@ import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
+import javafx.util.Duration;
 import models.drawable.Entity;
 import models.drawable.SpriteType;
 
@@ -32,9 +35,19 @@ public class ViewFrame {
     public static final Color WALL_COLOR = Color.BURLYWOOD;
     private static Pane pane = new Pane();
     private static Vector<Node> drawnEntities;
+    private static Timeline animator;
+
+    public static void setIsAnimating(boolean isAnimating) {
+        ViewFrame.isAnimating = isAnimating;
+        animator.play();
+    }
+
+    private static boolean isAnimating = false;
 
     private ViewFrame() {
         drawnEntities = new Vector<>();
+        animator = new Timeline(new KeyFrame(Duration.millis(16), event -> ViewFrame.drawEntities()));
+        animator.setCycleCount(5);
     }
 
     public static void drawFrame(Stage stage, int nbrX, int nbrY) {
@@ -101,9 +114,9 @@ public class ViewFrame {
         return vf;
     }
 
-    public static void drawSprite(int x, int y, Image sprite){
-        int xf = WALL * (x + 1) + CELL * x;
-        int yf = WALL * (y + 1) + CELL * y;
+    public static void drawSprite(double x, double y, Image sprite){
+        double xf = WALL * (x + 1) + CELL * x;
+        double yf = WALL * (y + 1) + CELL * y;
         Canvas canvas = new Canvas(CELL * SPAN, CELL * SPAN);
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.drawImage(sprite, 0, 0);
@@ -113,11 +126,15 @@ public class ViewFrame {
     }
 
     public static void drawEntities(){
+        if (!isAnimating){
+            return;
+        }
         LinkedList<Entity> entities = GameManager.getEntities();
         cleanEntities();
         for (Entity e : entities){
+            isAnimating = e.updateFloatingValues(true) || isAnimating;
             SpriteType t = e.getSpriteType();
-            drawSprite(e.getX(), e.getY(), SpriteManager.getSprite(t));
+            drawSprite(e.getDoubleX(), e.getDoubleY(), SpriteManager.getSprite(t));
         }
 
         renderEntities();
