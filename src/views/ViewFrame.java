@@ -12,15 +12,14 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Paint;
-import javafx.stage.Stage;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import models.drawable.Entity;
 import models.drawable.SpriteType;
 
-import java.awt.*;
 import java.util.LinkedList;
 import java.util.Vector;
 
@@ -36,6 +35,7 @@ public class ViewFrame {
     private static Pane pane = new Pane();
     private static Vector<Node> drawnEntities;
     private static Timeline animator;
+    private static Scene scene;
 
     public static void setIsAnimating(boolean isAnimating) {
         ViewFrame.isAnimating = isAnimating;
@@ -50,9 +50,13 @@ public class ViewFrame {
         animator.setCycleCount(5);
     }
 
+    public static void clear(){
+        pane.getChildren().clear();
+    }
+
     public static void drawFrame(Stage stage, int nbrX, int nbrY) {
         
-        Scene scene = new Scene(pane, ((WALL + CELL) * nbrX + WALL) * SPAN, ((WALL + CELL) * nbrY + WALL) * SPAN);
+        scene = new Scene(pane, ((WALL + CELL) * nbrX + WALL) * SPAN, ((WALL + CELL) * nbrY + WALL) * SPAN);
         scene.setFill(Color.BEIGE);
         Rectangle square;
         stage.setScene(scene);

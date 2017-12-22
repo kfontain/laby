@@ -16,7 +16,7 @@ public class Inputs implements EventHandler<KeyEvent>{
     	    return;
 
         boolean hasMoved;
-    	if (GameManager.getPlayer().isMoving() || lock)
+    	if (GameManager.getPlayer() != null && GameManager.getPlayer().isMoving() || lock)
     	    return;
         switch (event.getCode()){
             case UP:

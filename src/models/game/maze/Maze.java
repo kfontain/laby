@@ -6,10 +6,7 @@ import models.game.maze.graph.Edge;
 import models.game.maze.graph.Graph;
 import models.game.maze.graph.Vertex;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Random;
-import java.util.Vector;
+import java.util.*;
 
 public class Maze {
 	private Graph g;
@@ -25,6 +22,130 @@ public class Maze {
 		if(maze == null) maze = new Maze();
 		return maze;
 	}
+
+	public void loadCustomLevel(CustomLevel level){
+        g = new Graph();
+        g.setSizeX(13);
+        g.setSizeY(13);
+        g.createVertexArray();
+
+        WallType type = WallType.WALL;
+        LinkedList<Edge> coords = new LinkedList<>();
+        switch (level) {
+            case GAMEOVER:
+                type = WallType.CLOSED_DOOR;
+                //g
+                createEdge(coords,0, 1, 1, 1);
+                createEdge(coords,1, 0, 1, 1);
+                createEdge(coords,2, 0, 2, 1);
+                createEdge(coords,0, 2, 1, 2);
+                createEdge(coords,1, 2, 1, 3);
+                createEdge(coords,2, 2, 2, 3);
+                createEdge(coords,2, 2, 3, 2);
+                createEdge(coords,2, 2, 2, 1);
+
+                //a
+                createEdge(coords,4, 0, 4, 1);
+                createEdge(coords,4, 1, 4, 2);
+                createEdge(coords,5, 0, 5, 1);
+                createEdge(coords,5, 1, 5, 2);
+                createEdge(coords,4, 1, 3, 1);
+                createEdge(coords,5, 1, 6, 1);
+                createEdge(coords,4, 2, 3, 2);
+                createEdge(coords,5, 2, 6, 2);
+
+                //m
+                createEdge(coords,7, 0, 7, 1);
+                createEdge(coords,7, 1, 6, 1);
+                createEdge(coords,7, 2, 6, 2);
+                createEdge(coords,8, 0, 8, 1);
+                createEdge(coords,8, 1, 9, 1);
+                createEdge(coords,8, 2, 9, 2);
+                createEdge(coords,7, 1, 8, 1);
+
+                //e
+                createEdge(coords,9, 1, 10, 1);
+                createEdge(coords,10, 0, 10, 1);
+                createEdge(coords,11, 0, 11, 1);
+                createEdge(coords,9, 2, 10, 2);
+                createEdge(coords,10, 2, 10, 3);
+                createEdge(coords,11, 2, 11, 3);
+                createEdge(coords,10, 2, 10, 1);
+                createEdge(coords,11, 2, 11, 1);
+
+                //o
+                createEdge(coords,0, 10, 1, 10);
+                createEdge(coords,0, 11, 1, 11);
+                createEdge(coords,1, 10, 1, 9);
+                createEdge(coords,2, 10, 2, 9);
+                createEdge(coords,2, 10, 3, 10);
+                createEdge(coords,2, 11, 3, 11);
+                createEdge(coords,2, 11, 2, 12);
+                createEdge(coords,1, 11, 1, 12);
+
+                //v
+                createEdge(coords,3, 10, 4, 10);
+                createEdge(coords,3, 11, 4, 11);
+                createEdge(coords,5, 10, 6, 10);
+                createEdge(coords,5, 10, 5, 11);
+                createEdge(coords,4, 11, 5, 11);
+                createEdge(coords,4, 11, 4, 12);
+
+                //e
+                createEdge(coords,6, 10, 7, 10);
+                createEdge(coords,7, 9, 7, 10);
+                createEdge(coords,8, 9, 8, 10);
+                createEdge(coords,6, 11, 7, 11);
+                createEdge(coords,7, 11, 7, 12);
+                createEdge(coords,8, 11, 8, 12);
+                createEdge(coords,7, 11, 7, 10);
+                createEdge(coords,8, 11, 8, 10);
+
+                //r
+                createEdge(coords,10, 9, 10, 10);
+                createEdge(coords,10, 10, 10, 11);
+                createEdge(coords,11, 9, 11, 10);
+                createEdge(coords,11, 10, 11, 11);
+                createEdge(coords,10, 10, 9, 10);
+                createEdge(coords,11, 10, 12, 10);
+                createEdge(coords,10, 11, 9, 11);
+                createEdge(coords,10, 11, 11, 11);
+                break;
+            case CLEARED:
+                break;
+        }
+
+        for (Edge e : coords)
+            e.setWallType(type);
+    }
+
+    public Edge createEdge(int x1, int y1, int x2, int y2){
+        Edge result = new Edge();
+        Vertex v1 = g.getVertex(x1, y1, true);
+        Vertex v2 = g.getVertex(x2, y2, true);
+        Direction d = Direction.NORTH;
+        if (x1 > x2)
+            d = Direction.WEST;
+        if (x1 < x2)
+            d = Direction.EAST;
+        if (y1 > y2)
+            d = Direction.NORTH;
+        if (y1 < y2)
+            d = Direction.SOUTH;
+
+        result.addVertex(v1);
+        result.addVertex(v2);
+        v1.addEdge(d, result);
+        v2.addEdge(d.getOppositeDirection(), result);
+
+        return result;
+    }
+
+    public Edge createEdge(List<Edge> list, int x1, int y1, int x2, int y2){
+        Edge result = createEdge(x1, y1, x2, y2);
+        list.add(result);
+        return result;
+    }
 
 	public void initializeGraph(int x, int y, int difficulty){
 		g = new Graph();
@@ -43,7 +164,7 @@ public class Maze {
 
         for(int x = 0; x < g.getSizeX(); x++) {
             for(int y = 0; y < g.getSizeY(); y++) {
-                Vertex v = g.getVertex(x, y);
+                Vertex v = g.getVertex(x, y, true);
                 Vector<Direction> dir = v.getWalls();
                 for(Direction d : dir) {
                     int[] coords = new int[4];

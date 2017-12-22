@@ -63,6 +63,7 @@ public class Character extends Entity{
                 break;
             case NPC:
                 System.out.println("Aïe !");
+                GameManager.callGameOver();
                 break;
             case DOOR:
                 break;

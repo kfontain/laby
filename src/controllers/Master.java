@@ -24,10 +24,10 @@ public class Master {
 
     public void start(Stage primaryStage) {
         GameManager.initialize();
-        GameManager.getMaze().initializeGraph(10, 10, 20);
+        GameManager.getMaze().initializeGraph(13, 13, 20);
         SpriteManager.initialize("res");
 
-        ViewFrame.drawFrame(primaryStage, 10, 10);
+        ViewFrame.drawFrame(primaryStage, GameManager.getMaze().getSizeX(), GameManager.getMaze().getSizeY());
         EntitySpawner.spawnPlayerAtRandomPosition();
         Entity player = GameManager.getPlayer();
         

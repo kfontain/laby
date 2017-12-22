@@ -5,7 +5,9 @@ import models.drawable.Character;
 import models.drawable.Entity;
 import models.drawable.EntityType;
 import models.game.Direction;
+import models.game.maze.CustomLevel;
 import models.game.maze.Maze;
+import views.ViewFrame;
 
 import java.util.LinkedList;
 import java.util.Random;
@@ -156,5 +158,12 @@ public class GameManager {
             entities.remove(e);
 
         toBeCleared.clear();
+    }
+
+    public static void callGameOver() {
+        entities.clear();
+        ViewFrame.clear();
+        maze.loadCustomLevel(CustomLevel.GAMEOVER);
+        Master.getInstance().render();
     }
 }

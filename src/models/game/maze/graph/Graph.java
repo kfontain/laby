@@ -1,11 +1,8 @@
 package models.game.maze.graph;
 
 import models.game.Direction;
-import models.game.WallType;
 
-import java.io.Console;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.Random;
 import java.util.Vector;
 
@@ -19,12 +16,29 @@ public class Graph {
         random = new Random();
     }
 
-    void addVertex(Vertex v){
+    public void addVertex(Vertex v){
         vertexes[v.getX()][v.getY()] = v;
     }
 
     public Vertex getVertex(int x, int y){
         return vertexes[x][y];
+    }
+
+    public Vertex getVertex(int x, int y, boolean safe){
+        if (!safe)
+            return getVertex(x, y);
+        else{
+            Vertex v = getVertex(x, y);
+            if (v == null){
+                v = new Vertex(this);
+                v.setX(x);
+                v.setY(y);
+                addVertex(v);
+            }
+
+            return v;
+        }
+
     }
 
     public int getSizeX() {
