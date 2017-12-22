@@ -1,25 +1,23 @@
 package controllers.ingame;
 
-import java.util.LinkedList;
-
-import controllers.Master;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
-import models.drawable.Entity;
-import models.drawable.EntityType;
 import models.game.Direction;
-import views.ViewFrame;
 
 
 public class Inputs implements EventHandler<KeyEvent>{
 
+    private boolean lock = false;
+
     @Override
     // TODO A BOUGER !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     public void handle(KeyEvent event) {
-    	boolean hasMoved;
-    	if (GameManager.getPlayer().isMoving())
+    	if (lock)
     	    return;
 
+        boolean hasMoved;
+    	if (GameManager.getPlayer().isMoving() || lock)
+    	    return;
         switch (event.getCode()){
             case UP:
             	hasMoved = GameManager.tryMoveCharacter(GameManager.getPlayer(), Direction.NORTH);
@@ -39,6 +37,7 @@ public class Inputs implements EventHandler<KeyEvent>{
         }
 
         GameManager.callNextTurn(hasMoved);
+        lock = false;
     }
 
 }

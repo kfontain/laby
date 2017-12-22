@@ -128,7 +128,7 @@ public class GameManager {
     public static boolean tryMoveCharacter(Character character, Direction direction){
         int x = character.getX();
         int y = character.getY();
-        boolean able = !maze.getWallsAt(x, y).contains(direction) && !maze.getDoorsAt(x, y, false).contains(direction);
+        boolean able = !maze.getWallsAt(x, y).contains(direction) && !maze.getDoorsAt(x, y, true).contains(direction);
         if (able) {
         	//character.move(direction);
             character.updateFloatingValues(true);
