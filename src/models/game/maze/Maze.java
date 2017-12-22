@@ -111,6 +111,7 @@ public class Maze {
                 createEdge(coords,10, 11, 11, 11);
                 break;
             case CLEARED:
+                type = WallType.OPENED_DOOR;
                 //y
                 createEdge(coords,1, 1, 2, 1);
                 createEdge(coords,1, 2, 2, 2);
@@ -148,9 +149,33 @@ public class Maze {
                 createEdge(coords,2, 11, 1, 11);
                 createEdge(coords,2, 11, 2, 12);
                 createEdge(coords,3, 11, 3, 12);
+                createEdge(coords,2, 11, 3, 11);
                 createEdge(coords,3, 11, 4, 11);
                 createEdge(coords,3, 10, 4, 10);
                 createEdge(coords,3, 9, 4, 9);
+
+                //i
+                createEdge(coords, 5, 9, 6, 9);
+                createEdge(coords, 5, 10, 6, 10);
+                createEdge(coords, 5, 11, 6, 11);
+                createEdge(coords, 5, 8, 5, 9);
+                createEdge(coords, 6, 8, 6, 9);
+                createEdge(coords, 5, 11, 5, 12);
+                createEdge(coords, 6, 11, 6, 12);
+
+                //n
+                createEdge(coords, 7, 9, 8, 9);
+                createEdge(coords, 7, 10, 8, 10);
+                createEdge(coords, 7, 11, 8, 11);
+                createEdge(coords, 8, 9, 9, 9);
+                createEdge(coords, 8, 10, 9, 10);
+                createEdge(coords, 8, 11, 9, 11);
+                createEdge(coords, 9, 9, 10, 9);
+                createEdge(coords, 9, 10, 10, 10);
+                createEdge(coords, 9, 11, 10, 11);
+                createEdge(coords, 8, 8, 8, 9);
+                createEdge(coords, 9, 11, 9, 12);
+
                 break;
         }
 
