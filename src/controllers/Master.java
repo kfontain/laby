@@ -1,20 +1,11 @@
 package controllers;
 
-import java.util.ArrayList;
-
 import controllers.ingame.EntitySpawner;
 import controllers.ingame.GameManager;
 import controllers.ingame.SpriteManager;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.util.Duration;
-import models.drawable.Character;
 import models.drawable.Entity;
-import models.game.maze.Maze;
 import views.ViewFrame;
 
 public class Master {
@@ -64,11 +55,11 @@ public class Master {
              ViewFrame.drawWall(wall[0], wall[1], wall[2], wall[3], Color.BURLYWOOD);
         }
         for(int[] door : GameManager.getMaze().getDoors(true)) {
-            ViewFrame.drawWall(door[0], door[1], door[2], door[3], Color.GREEN);
+            ViewFrame.drawWall(door[0], door[1], door[2], door[3], Color.RED);
         }
 
         for(int[] door : GameManager.getMaze().getDoors(false)) {
-            ViewFrame.drawWall(door[0], door[1], door[2], door[3], Color.RED);
+            ViewFrame.drawWall(door[0], door[1], door[2], door[3], Color.GREEN);
         }
 
         ViewFrame.setIsAnimating(true);
