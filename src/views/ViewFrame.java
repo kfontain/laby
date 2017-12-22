@@ -23,7 +23,9 @@ import models.drawable.SpriteType;
 import java.util.LinkedList;
 import java.util.Vector;
 
-
+/**
+ * ViewFrame permet d'initialiser et de mettre à jour l'interface graphique à chaque déplacement du joueur.
+ */
 public class ViewFrame {
 
     private static ViewFrame vf;
@@ -54,6 +56,11 @@ public class ViewFrame {
         pane.getChildren().clear();
     }
 
+    /**
+     * @param stage Stage sur lequel drawFrame va dessiner.
+     * @param nbrX nombre de cases en x du labyrinthe.
+     * @param nbrY nombre de cases en y du labyrinthe.
+     */
     public static void drawFrame(Stage stage, int nbrX, int nbrY) {
         
         scene = new Scene(pane, ((WALL + CELL) * nbrX + WALL) * SPAN, ((WALL + CELL) * nbrY + WALL) * SPAN);
