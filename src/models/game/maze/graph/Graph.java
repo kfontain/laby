@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Vector;
 
+/**
+ * Graph est la classe représentant la labyrinthe sous forme d'un graphe en modèle.
+ * Si il y a une Edge entre deux Vertex, cela représente un mur dans la labyrinthe.
+ */
 public class Graph {
     private int sizeX;
     private int sizeY;
@@ -103,7 +107,11 @@ public class Graph {
         }
     }
 
-    //Permet d'obtenir les distances entre un sommet (x,y) et les autres
+    /**
+     * Permet d'obtenir les distances entre un sommet et le reste des sommets.
+     * @param x coordonnée en x du sommet à partir duquel on veut connaitre les distances.
+     * @param y coordonnée en y du sommet à partir duquel on veut connaitre les distances.
+     */
     public void updateDistanceFromVertex(int x, int y) {
     	unmarkVertex();
     	markAccessVertex(x, y);

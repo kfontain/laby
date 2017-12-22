@@ -8,6 +8,10 @@ import models.game.maze.graph.Vertex;
 
 import java.util.*;
 
+
+/**
+ * Maze est la classe représentant le labyrinthe. Il est construit à partir d'un graphe.
+ */
 public class Maze {
 	private Graph g;
 	private static Maze maze;
@@ -22,7 +26,12 @@ public class Maze {
 		return maze;
 	}
 
-	public void loadCustomLevel(CustomLevel level){
+
+    /**
+     * loadCustomLevel permet de charger un niveau non aléatoire.
+     * @param level le niveau qui sera chargé.
+     */
+    public void loadCustomLevel(CustomLevel level){
         g = new Graph();
         g.setSizeX(13);
         g.setSizeY(13);
@@ -183,6 +192,15 @@ public class Maze {
             e.setWallType(type);
     }
 
+
+    /**
+     * createEdge permet de créer une Edge entre deux Vertex du graphe.
+     * @param x1 coordonnée en x du Vertex 1.
+     * @param y1 coordonnée en y du Vertex 1.
+     * @param x2 coordonnée en x du Vertex 2.
+     * @param y2 coordonnée en y du Vertex 2.
+     * @return retourne l'Edge ainsi crée.
+     */
     public Edge createEdge(int x1, int y1, int x2, int y2){
         Edge result = new Edge();
         Vertex v1 = g.getVertex(x1, y1, true);
@@ -223,6 +241,10 @@ public class Maze {
 		g.drawMazeOnConsole();
 	}
 
+    /**
+     * getWalls permet d'obtenir la liste des murs du labyrinthe.
+     * @return liste d'entiers représentants les murs du labyrinthe.
+     */
     public ArrayList<int[]> getWalls(){
         ArrayList<int[]> walls = new ArrayList<int[]>();
 
@@ -266,6 +288,11 @@ public class Maze {
         return walls;
     }
 
+    /**
+     * getDoors permet d'obtenir toutes les portes ouvertes ou fermées.
+     * @param isClosed permet de définir si l'on veut les portes fermées (true) ou ouvertes (false).
+     * @return retourne la liste des portes souhaitées sous forme d'entiers.
+     */
     public ArrayList<int[]> getDoors(boolean isClosed){
         ArrayList<int[]> walls = new ArrayList<int[]>();
 
@@ -340,7 +367,12 @@ public class Maze {
 		return g.getVertex(x, y).getWalls();
 	}
 
-	public Edge getRandomEdge() {
+
+    /**
+     * getRandomEdge permet d'obtenir une Edge du graphe de façon aléatoire.
+     * @return une Edge sélectionnée de façon aléatoire.
+     */
+    public Edge getRandomEdge() {
 	    while(true){
             int x = random.nextInt(g.getSizeX());
             int y = random.nextInt(g.getSizeY());
