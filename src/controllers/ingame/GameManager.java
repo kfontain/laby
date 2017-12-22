@@ -162,6 +162,7 @@ public class GameManager {
 
     public static void callNextTurn(boolean success){
         if (success){
+            EventManager.manageCollision();
             tryMoveNPCs();
             EventManager.manageCollision();
         }

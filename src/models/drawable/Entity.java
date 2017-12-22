@@ -134,7 +134,7 @@ public abstract class Entity {
     }
 
     public boolean ifCollision(Entity e){
-        return (this.x == e.x && this.y == e.y);
+        return (this.toX == e.toX && this.toY == e.toY);
     }
 
     public abstract void eventCollision(Entity collider);
