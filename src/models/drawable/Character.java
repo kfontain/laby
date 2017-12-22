@@ -3,8 +3,18 @@ package models.drawable;
 import controllers.ingame.GameManager;
 import models.game.Direction;
 
+/**
+ * Character est la classe représentant les entités mobiles dans la labyrinthe, le joueur et les ennemis.
+ * @see Entity
+ */
 public class Character extends Entity{
 
+    /**
+     * Constructeur de la classe Character.
+     * @param x position en x du personnage.
+     * @param y position en y du personnage.
+     * @param isPlayer le personnage est joueur si vrai, ennemi si faux.
+     */
     public Character(int x, int y, boolean isPlayer){
         super(x, y, (isPlayer ? EntityType.PLAYER : EntityType.NPC));
         setSpriteType((isPlayer ? SpriteType.PLAYER : SpriteType.NPC));

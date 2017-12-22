@@ -4,6 +4,10 @@ import models.game.WallType;
 import models.game.maze.Maze;
 import models.game.maze.graph.Edge;
 
+/**
+ * OnOff est la classe représentant les boutons permettant d'activer/désactiver un mur dans le labyrinthe.
+ * @see Entity
+ */
 public class OnOff extends Entity {
 
     private boolean isOpen;

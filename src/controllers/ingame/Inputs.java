@@ -5,6 +5,9 @@ import javafx.scene.input.KeyEvent;
 import models.game.Direction;
 
 
+/**
+ * Inputs permet de détecter les entrées claviers de l'utilisateurs et d'envoyer des signaux au joueur.
+ */
 public class Inputs implements EventHandler<KeyEvent>{
 
     private boolean lock = false;

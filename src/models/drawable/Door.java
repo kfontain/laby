@@ -2,6 +2,10 @@ package models.drawable;
 
 import controllers.ingame.GameManager;
 
+/**
+ * Door est la classe représentant la porte de sortie du labyrinthe.
+ * @see Entity
+ */
 public class Door extends Entity{
     public Door(int x, int y) {
         super(x, y, EntityType.DOOR);

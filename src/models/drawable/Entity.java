@@ -2,6 +2,10 @@ package models.drawable;
 
 import models.game.Direction;
 
+/**
+ * Entity est une classe abstraite dont toutes les entités du labyrinthe héritent. Elle définie les fonctionnements
+ * généraux d'une entité.
+ */
 public abstract class Entity {
     private final static double ANIMATION_SPEED = 0.2;
 

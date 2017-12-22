@@ -5,6 +5,10 @@ import models.drawable.Character;
 
 import java.util.Random;
 
+
+/**
+ * EntitySpawner permet d'initialiser à des positions aléatoires des objets de la classe Entity.
+ */
 public class EntitySpawner {
 
     public static void spawnAtRandomPosition(Entity e){

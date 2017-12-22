@@ -6,6 +6,9 @@ import models.drawable.EntityType;
 
 import java.util.LinkedList;
 
+/**
+ * EventManager permet de détecter si il y a collision et d'envoyer un signal aux entités concernées.
+ */
 public class EventManager {
 
     public static void manageCollision(){

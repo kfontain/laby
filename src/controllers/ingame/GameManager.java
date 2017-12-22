@@ -12,6 +12,9 @@ import views.ViewFrame;
 import java.util.LinkedList;
 import java.util.Random;
 
+/**
+ * GameManager assure le bon déroulement du jeu : déplacement du joueur, des ennemis, suppression des bonus rammassés.
+ */
 public class GameManager {
 
     private static LinkedList<Entity> entities;
@@ -33,6 +36,9 @@ public class GameManager {
         toBeCleared = new LinkedList<>();
     }
 
+    /**
+     * @param entity L'entité à être ajoutée à la liste des entitées en jeu.
+     */
     public static void addEntity(Entity entity){
         if (entity.getType() == EntityType.PLAYER)
             setPlayer((Character) entity);
@@ -95,7 +101,11 @@ public class GameManager {
     	}
     	return false;
     }
-    
+
+
+    /**
+     * tryMoveNPCs permet de déplacer tous les ennemis présents dans le labyrinthe.
+     */
     public static void tryMoveNPCs() {
     	LinkedList<Character> stackChar = new LinkedList<>();
     	int[] bitmap = new int[npcs.size()];
@@ -127,6 +137,13 @@ public class GameManager {
     	}
     }
 
+
+    /**
+     * Permet de vérifier si le déplacement d'un personnage dans une direction est possible.
+     * @param character personnage que l'on souhaite déplacer.
+     * @param direction direction dans laquelle on souhaite déplacer le personnage.
+     * @return vrai si le déplacement est possible, faux sinon.
+     */
     public static boolean tryMoveCharacter(Character character, Direction direction){
         int x = character.getX();
         int y = character.getY();

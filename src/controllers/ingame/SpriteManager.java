@@ -5,6 +5,9 @@ import models.drawable.SpriteType;
 
 import java.util.HashMap;
 
+/**
+ * SpriteManager permet de récupérer et de ranger les images utilisées dans l'interface graphique.
+ */
 public class SpriteManager {
     private static HashMap<SpriteType, String> spriteTable;
 
