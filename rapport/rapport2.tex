@@ -192,6 +192,7 @@ Pour se faire, nous avons commencé par implémenter une classe abstraite Entity
 afin de ne pas avoir de redondance dans notre code.
 Puis nous avons crée une classe Character héritant de Entity, en implémentant
 les quelques fonctionnalités propres à cette classe (comme le déplacement).
+Cette partie a principalement été faite par Adrien.
 
 \subsubsection{Objets statiques}
 L'implémentation des objets statiques que l'on peut afficher tel que les
@@ -199,23 +200,85 @@ bonbons a été faite de façon naturelle. Il nous suffisait d'hériter de la
 classe Entity et d'implémenter les quelques fonctionnalités propres à chaque
 objet. Sauf pour les boutons OnOff permettant d'activer/désactiver une porte,
 étant lié à un certain mur, il était plus compliqué d'implémenter ces boutons.
+Tous les membres ont contribués à l'implémentation des différents objets.
 
 \subsubsection{Gestion des collisions}
 Le prochain objectif était de faire disparaitre les bonbons au contact du
 joueur. Pour cela nous avons créer un contrôleur EventManager dont le but est
 uniquement de gérer les collisions. EventManager parcourt la liste de toutes
 les entités en jeu et envoie un signal aux entités si il y a collision.
+Cette partie a principalement été traitée par Guillaume.
 
 \subsubsection{Ennemis}
-Partie pour Romain.
+Les ennemis sont représentés par la même classe que le joueur (Character), la
+seule différence étant un booléen et leur déplacement automatisé.
+Deux façons nous ont été proposées pour la gestion des ennemis, et notamment
+pour leur déplacement. La première solution se basait sur un système de tour par
+tour; le joueur se déplace, puis les ennemis. La deuxième solution était que
+les ennemis se déplacent en temps réel, même si le joueur ne bougeait pas.
+Nous avons opté pour la première solution, car nous la trouvions plus proche
+de ce qui était attendu.
+Nous avons donc implémenté l'algorithme de Manhattan afin que les ennemis
+puissent se rapprocher du joueur. Cet algorithme permet de déterminer la
+distance de chaque sommet à un sommet donné, ainsi on l'utilise principalement
+pour déterminer la direction dans laquelle les ennemis devraient se déplacer
+afin qu'ils se rapprochent du joueur. Le mouvement est effectué par le
+GameManager.
+Lorsque un ennemi touche un joueur, un signal est émis à l'eventHandler, qui
+mettra fin au jeu.
+Cette partie a principalement été faite par Romain.
+
+\subsubsection{Boutons OnOff}
+Après avoir implémenté les bases du jeu (joueur, ennemis, déplacements,
+collisions), nous devions implémenté les portes qui s'ouvraient ou fermaient
+à l'aide d'un bouton. Le bouton OnOff est également une entité qui hérite
+de la classe abstraite Entity, cependant ses fonctionnalités sont plus
+complexes que les autres entités telles que les bonbons. Pour se faire, nous
+avons ajouté un membre à la classe OnOff, qui est une arête du graphe en modèle.
+Ceci représente le mur qui est actionné par le bouton dans le labyrinthe. Lors
+d'une collision entre le joueur et le bouton, un signal est envoyé à
+l'EventManager, qui va envoyer un signal au modèle du graphe et modifier le
+type de l'arête en question (WallType). Ceci aura pour effet d'ouvrir ou de
+fermer une porte. La vue va ensuite mettre à jour l'affichage est modifier la
+couleur du mur (vert/rouge). Cette partie a principalement été faite par Kenji.
+
+\subsubsection{EntitySpawner}
+Afin de facilier l'ajout/suppression d'entités dans notre labyrinthe, nous avons
+créer une classe EntitySpawner dont le but est d'instancier une entité et de
+la positionner sur le labyrinthe. Cela nous permet d'alléger le code dans la
+classe Master et d'être plus efficace sur la gestion de nos entités.
 
 %-------------------------------------------------------------------------------
-%
+% Bilan
 %-------------------------------------------------------------------------------
 
+\newpage
+\section{Bilan}
+Dans l'ensemble, nous trouvons que le projet s'est bien déroulé. Nous estimons
+avoir répondu à la plupart des fonctionnalités attendues, même si certaines
+paraissent "injustes" à cause de la génération complétement aléatoire des
+positions.
+La répartition des tâches n'a pas été simple, beaucoup de parties du projet
+semblaient étroitement liées et nous avions du prendre le temps de mettre sur
+papier un modèle MVC bien séparé afin de pouvoir travailler efficacement
+en parrallèle.
+
 %-------------------------------------------------------------------------------
-%
+% Perspective d'améliorations
 %-------------------------------------------------------------------------------
+\section{Perspective d'amélioration}
+
+Une des améliorations que nous envisagions mais n'avons pas eu le temps
+d'implémenter était une amélioration du contrôle de l'aléatoire. Dans la version
+actuelle, toutes les entités sont générées à une position aléatoire dans le
+labyrinthe. Cela signifie que le joueur peut très bien apparaître juste à côté
+d'un ennemi. Une solution envisagée serait d'utiliser les valeurs obtenues par
+l'algorithme de Manhattan afin de faire apparaître les ennemis à une distance
+minimale du joueur. \\
+Nous pensons également que certaines parties de notre code ne sont pas
+pertinentes. Nous pouvons touver des commentaires "TODO : à déplacer" dans
+certaines classes (ViewFrame par exemple), mais n'avons pas eu le temps de
+nous concerter pour améliorer notre code.
 
 %-------------------------------------------------------------------------------
 % END
