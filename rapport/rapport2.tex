@@ -181,7 +181,7 @@ de la génération de graphe et l'affichage a été fait par Romain et Kenji.
 
 \subsubsection{Modèle graphe}
 
-Si tu peux remplir cette partie Adrien.
+Nous avons préféré implémenter notre propre module de graphes, celui-ci se rapproche de celui proposé dans le sujet, mais en un peu plus simpliste et plus destiné à une utilisation pour un jeu de plateau. Ce module est abstrait du reste du code par la classe Maze, qui s'occupe des manipulations moins atomiques sur le graphe. Ainsi, la classe Graphe et ses dépendances gèrent la manipulation de graphe, c'est-à-dire en utilisant des points (Vertex) et des liaisons (Edge) en tant que tel, et la classe Maze, utilisée par notre jeu, gère les transformations et la récupération d'informations de Graphe. Adrien s'est occupé de son implémentation principale, et Romain ainsi que Kenji de modeler son utilisation pour remplir les objectifs du jeu (respectivement calcul de parcours/distance, gestion des portes et interrupteurs).
 
 \subsection{Implémentation des entités}
 
