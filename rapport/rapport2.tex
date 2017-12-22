@@ -172,7 +172,42 @@ Voici le premier modèle retenu :
 
 \subsection{Premier pas}
 Nous avons commencé notre implémentation par la génération de graphe (modèle)
-ainsi que l'affichage de la grille (vue).
+ainsi que l'affichage de la grille (vue). Le but était d'obtenir une interface
+graphique avec un affichage d'un labyrinthe. Pour cela, il nous a également
+fallu implémenter Master (contrôleur) afin de faire le lien entre le graphe
+généré en modèle et l'affichage. Cette partie nous a pas posé de
+problème particulier. Guillaume s'est occupé de la partie contrôleur, Adrien
+de la génération de graphe et l'affichage a été fait par Romain et Kenji.
+
+\subsubsection{Modèle graphe}
+
+Si tu peux remplir cette partie Adrien.
+
+\subsection{Implémentation des entités}
+
+\subsubsection{Déplacement du joueur}
+Une fois la génération et l'affichage du labyrinthe effectués, notre prochain
+objectif était d'implémenter le joueur (affichage + déplacement).
+Pour se faire, nous avons commencé par implémenter une classe abstraite Entity,
+afin de ne pas avoir de redondance dans notre code.
+Puis nous avons crée une classe Character héritant de Entity, en implémentant
+les quelques fonctionnalités propres à cette classe (comme le déplacement).
+
+\subsubsection{Objets statiques}
+L'implémentation des objets statiques que l'on peut afficher tel que les
+bonbons a été faite de façon naturelle. Il nous suffisait d'hériter de la
+classe Entity et d'implémenter les quelques fonctionnalités propres à chaque
+objet. Sauf pour les boutons OnOff permettant d'activer/désactiver une porte,
+étant lié à un certain mur, il était plus compliqué d'implémenter ces boutons.
+
+\subsubsection{Gestion des collisions}
+Le prochain objectif était de faire disparaitre les bonbons au contact du
+joueur. Pour cela nous avons créer un contrôleur EventManager dont le but est
+uniquement de gérer les collisions. EventManager parcourt la liste de toutes
+les entités en jeu et envoie un signal aux entités si il y a collision.
+
+\subsubsection{Ennemis}
+Partie pour Romain.
 
 %-------------------------------------------------------------------------------
 %
