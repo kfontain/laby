@@ -12,6 +12,8 @@ public class Bonus extends Entity{
     public Bonus(int x, int y) {
         super(x, y, EntityType.BONUS);
         randomizeSprite();
+        setGoalX(x);
+        setGoalY(y);
     }
 
     public Bonus() {
@@ -49,6 +51,10 @@ public class Bonus extends Entity{
             case BONUS:
                 break;
         }
+    }
+
+    public boolean ifCollision(Entity e){
+        return getX() == e.getGoalX() && getY() == e.getGoalY();
     }
 }
 

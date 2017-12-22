@@ -10,6 +10,8 @@ public class Door extends Entity{
     public Door(int x, int y) {
         super(x, y, EntityType.DOOR);
         this.setSpriteType(SpriteType.EXIT);
+        setGoalX(x);
+        setGoalY(y);
     }
 
     public Door() {
@@ -22,7 +24,7 @@ public class Door extends Entity{
     {
         switch (collider.getType()) {
             case PLAYER:
-                System.out.println("Sortie");
+                GameManager.callCleared();
                 break;
             case NPC:
                 break;
@@ -34,6 +36,11 @@ public class Door extends Entity{
                 break;
         }
     }
+
+    public boolean ifCollision(Entity e){
+        return (getX() == e.getGoalX() && getY() == e.getGoalY());
+    }
+
 }
 
 

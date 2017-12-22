@@ -38,6 +38,7 @@ public class ViewFrame {
     private static Vector<Node> drawnEntities;
     private static Timeline animator;
     private static Scene scene;
+    private static Stage stage;
 
     public static void setIsAnimating(boolean isAnimating) {
         ViewFrame.isAnimating = isAnimating;
@@ -56,18 +57,22 @@ public class ViewFrame {
         pane.getChildren().clear();
     }
 
+    private static void generateScene(int nbrX, int nbrY){
+        scene = new Scene(pane, ((WALL + CELL) * nbrX + WALL) * SPAN, ((WALL + CELL) * nbrY + WALL) * SPAN);
+        scene.setFill(Color.BEIGE);
+        stage.setScene(scene);
+    }
+
     /**
-     * @param stage Stage sur lequel drawFrame va dessiner.
      * @param nbrX nombre de cases en x du labyrinthe.
      * @param nbrY nombre de cases en y du labyrinthe.
      */
-    public static void drawFrame(Stage stage, int nbrX, int nbrY) {
+    public static void drawFrame(int nbrX, int nbrY) {
         
-        scene = new Scene(pane, ((WALL + CELL) * nbrX + WALL) * SPAN, ((WALL + CELL) * nbrY + WALL) * SPAN);
-        scene.setFill(Color.BEIGE);
-        Rectangle square;
-        stage.setScene(scene);
+        if (scene == null)
+            generateScene(nbrX, nbrY);
 
+        Rectangle square;
         //TODO:  A BOUGER
         scene.addEventFilter(KeyEvent.KEY_PRESSED, new Inputs());
         //
@@ -161,5 +166,9 @@ public class ViewFrame {
     public static void renderEntities(){
         for (Node n : drawnEntities)
             pane.getChildren().add(n);
+    }
+
+    public static void setStage(Stage stage) {
+        ViewFrame.stage = stage;
     }
 }

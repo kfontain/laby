@@ -47,4 +47,8 @@ public class OnOff extends Entity {
         }
     }
 
+    public boolean ifCollision(Entity e){
+        return getX() == e.getGoalX() && getY() == e.getGoalY();
+    }
+
 }

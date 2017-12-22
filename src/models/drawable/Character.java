@@ -72,8 +72,8 @@ public class Character extends Entity{
             case PLAYER:
                 break;
             case NPC:
-                System.out.println("Aïe !");
-                GameManager.callGameOver();
+                if (getType() == EntityType.PLAYER)
+                    GameManager.callGameOver();
                 break;
             case DOOR:
                 break;

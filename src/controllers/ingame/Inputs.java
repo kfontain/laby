@@ -34,6 +34,8 @@ public class Inputs implements EventHandler<KeyEvent>{
             case RIGHT:
             	hasMoved = GameManager.tryMoveCharacter(GameManager.getPlayer(), Direction.EAST);
                 break;
+            case R:
+                GameManager.restart();
             default:
             	hasMoved = false;
                 break;

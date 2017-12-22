@@ -48,6 +48,32 @@ public class GameManager {
         entities.push(entity);
     }
 
+    public static void restart(){
+        entities.clear();
+        npcs.clear();
+        nbBonus = 0;
+        toBeCleared.clear();
+        generateSampleLevel();
+    }
+
+
+    public static void generateSampleLevel(){
+        maze.initializeGraph(13, 13, 20);
+        EntitySpawner.spawnNpcAtRandomPosition();
+        EntitySpawner.spawnNpcAtRandomPosition();
+        EntitySpawner.spawnNpcAtRandomPosition();
+        EntitySpawner.spawnNpcAtRandomPosition();
+        EntitySpawner.spawnNpcAtRandomPosition();
+        EntitySpawner.spawnNpcAtRandomPosition();
+        EntitySpawner.spawnNpcAtRandomPosition();
+        EntitySpawner.spawnOnOffAtRandomPosition();
+        EntitySpawner.spawnCandyAtRandomPosition();
+        EntitySpawner.spawnDoorAtRandomPosition();
+        EntitySpawner.spawnPlayerAtRandomPosition();
+        Entity player = getPlayer();
+        getMaze().updateDistFromPlayer(player.getX(), player.getY());
+    }
+
     public static void setPlayer(Character player) {
         GameManager.player = player;
     }
@@ -164,11 +190,11 @@ public class GameManager {
         if (success){
             EventManager.manageCollision();
             tryMoveNPCs();
-            EventManager.manageCollision();
+            EventManager.manageCollision(EntityType.NPC);
         }
 
         cleanTurn();
-        Master.getInstance().render();
+        Master.getInstance().render(false);
     }
 
     private static void cleanTurn(){
@@ -182,6 +208,13 @@ public class GameManager {
         entities.clear();
         ViewFrame.clear();
         maze.loadCustomLevel(CustomLevel.GAMEOVER);
-        Master.getInstance().render();
+        Master.getInstance().render(true);
+    }
+
+    public static void callCleared() {
+        entities.clear();
+        ViewFrame.clear();
+        maze.loadCustomLevel(CustomLevel.CLEARED);
+        Master.getInstance().render(true);
     }
 }

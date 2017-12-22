@@ -1,11 +1,9 @@
 package controllers;
 
-import controllers.ingame.EntitySpawner;
 import controllers.ingame.GameManager;
 import controllers.ingame.SpriteManager;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import models.drawable.Entity;
 import views.ViewFrame;
 
 public class Master {
@@ -23,34 +21,21 @@ public class Master {
     }
 
     public void start(Stage primaryStage) {
+        ViewFrame.setStage(primaryStage);
         GameManager.initialize();
-        GameManager.getMaze().initializeGraph(13, 13, 20);
         SpriteManager.initialize("res");
+        GameManager.generateSampleLevel();
+        ViewFrame.drawFrame(GameManager.getMaze().getSizeX(), GameManager.getMaze().getSizeY());
 
-        ViewFrame.drawFrame(primaryStage, GameManager.getMaze().getSizeX(), GameManager.getMaze().getSizeY());
-        EntitySpawner.spawnPlayerAtRandomPosition();
-        Entity player = GameManager.getPlayer();
-        
-        GameManager.getMaze().updateDistFromPlayer(player.getX(), player.getY());
-        
-        EntitySpawner.spawnNpcAtRandomPosition();
-        EntitySpawner.spawnNpcAtRandomPosition();
-        EntitySpawner.spawnNpcAtRandomPosition();
-        EntitySpawner.spawnNpcAtRandomPosition();
-        EntitySpawner.spawnNpcAtRandomPosition();
-        EntitySpawner.spawnNpcAtRandomPosition();
-        EntitySpawner.spawnNpcAtRandomPosition();
-
-        EntitySpawner.spawnOnOffAtRandomPosition();
-
-        EntitySpawner.spawnCandyAtRandomPosition();
-
-        EntitySpawner.spawnDoorAtRandomPosition();
-
-        render();
+        render(true);
     }
 
-    public void render(){
+    public void render(boolean redraw){
+        if (redraw){
+            ViewFrame.clear();
+            ViewFrame.drawFrame(GameManager.getMaze().getSizeX(), GameManager.getMaze().getSizeY());
+        }
+
         for(int[] wall : GameManager.getMaze().getWalls()) {
              ViewFrame.drawWall(wall[0], wall[1], wall[2], wall[3], Color.BURLYWOOD);
         }

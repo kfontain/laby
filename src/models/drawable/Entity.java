@@ -125,6 +125,14 @@ public abstract class Entity {
         return toY;
     }
 
+    protected void setGoalX(int toX) {
+        this.toX = toX;
+    }
+
+    protected void setGoalY(int toY) {
+        this.toY = toY;
+    }
+
     public void setSpriteType(SpriteType spriteType) {
         this.spriteType = spriteType;
     }

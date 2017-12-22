@@ -1,6 +1,5 @@
 package controllers.ingame;
 
-import models.drawable.Character;
 import models.drawable.Entity;
 import models.drawable.EntityType;
 
@@ -16,7 +15,7 @@ public class EventManager {
         LinkedList<Entity> entities = GameManager.getEntities();
         //LinkedList<Entity> entitiesCol = new LinkedList<>();
         for (Entity e : entities) {
-            if(e != player && player.ifCollision(e)){
+            if(e != player && (player.ifCollision(e) || e.ifCollision(player))){
                 //entitiesCol.add(player);
                 player.eventCollision(e);
                 e.eventCollision(player);
@@ -30,5 +29,18 @@ public class EventManager {
         	}
         		
         }*/
+    }
+
+    public static void manageCollision(EntityType type){
+        Entity player = GameManager.getPlayer();
+        LinkedList<Entity> entities = GameManager.getEntities();
+        //LinkedList<Entity> entitiesCol = new LinkedList<>();
+        for (Entity e : entities) {
+            if(e.getType() == type && e != player && (player.ifCollision(e) || e.ifCollision(player))){
+                //entitiesCol.add(player);
+                player.eventCollision(e);
+                e.eventCollision(player);
+            }
+        }
     }
 }
