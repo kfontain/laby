@@ -7,7 +7,6 @@ import models.drawable.EntityType;
 import models.game.Direction;
 import models.game.maze.Maze;
 
-import java.beans.EventHandler;
 import java.util.LinkedList;
 import java.util.Random;
 
@@ -89,7 +88,7 @@ public class GameManager {
     			return false;
     	}
     	for(Character npc : npcs) {
-    		if(npc.getX() == newX && npc.getY() == newY)
+    		if(npc.getGoalX() == newX && npc.getGoalY() == newY)
     			return true;
     	}
     	return false;

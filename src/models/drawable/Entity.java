@@ -113,6 +113,14 @@ public abstract class Entity {
         this.y = y;
     }
 
+    public int getGoalX() {
+        return toX;
+    }
+
+    public int getGoalY() {
+        return toY;
+    }
+
     public void setSpriteType(SpriteType spriteType) {
         this.spriteType = spriteType;
     }

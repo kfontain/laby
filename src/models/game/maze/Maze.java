@@ -1,15 +1,15 @@
 package models.game.maze;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Random;
-import java.util.Vector;
-
 import models.game.Direction;
 import models.game.WallType;
 import models.game.maze.graph.Edge;
 import models.game.maze.graph.Graph;
 import models.game.maze.graph.Vertex;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Random;
+import java.util.Vector;
 
 public class Maze {
 	private Graph g;
@@ -161,7 +161,7 @@ public class Maze {
             int y = random.nextInt(g.getSizeY());
             Collection<Edge> edges = this.g.getVertex(x,y).getEdges().values();
             for (Edge e : edges) {
-                if (e.getWallType() == WallType.WALL || e.getWallType() == WallType.CLOSED_DOOR) {
+                if (e.getWallType() == WallType.WALL) {
                     return e;
                 }
             }

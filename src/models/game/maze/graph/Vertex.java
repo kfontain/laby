@@ -3,7 +3,10 @@ package models.game.maze.graph;
 import models.game.Direction;
 import models.game.WallType;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+import java.util.Vector;
 
 public class Vertex {
     private int x;
@@ -125,7 +128,7 @@ public class Vertex {
     }
 
     public boolean isLinkedTo(Direction d){
-        return edges.containsKey(d) && edges.get(d).getWallType() == WallType.PATH || edges.get(d).getWallType() == WallType.OPENED_DOOR;
+        return edges.containsKey(d) && (edges.get(d).getWallType() == WallType.PATH || edges.get(d).getWallType() == WallType.OPENED_DOOR);
     }
     
     public Direction getDirectionTo(Vertex dest) {
